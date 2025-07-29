@@ -1,0 +1,85 @@
+﻿@{
+    ViewData["Title"] = "Chatbot";
+}
+
+<div style="display: flex; justify-content: center; align-items: center; height: 90vh; background: #1e1e1e; color: #fff; flex-direction: column;">
+    <h2 style="margin-bottom: 20px;">FNZ_ChatBot</h2>
+
+    <!-- Conteneur du chat -->
+    <div id="chatContainer" style="width: 70%; max-width: 900px; border: 1px solid #333; border-radius: 8px; padding: 15px; height: 70vh; overflow-y: auto; background: #2c2c2c;">
+        <!-- Messages -->
+    </div>
+
+    <!-- Barre de saisie -->
+    <div style="width: 70%; max-width: 900px; margin-top: 10px; display: flex; background: #333; border-radius: 8px; padding: 8px;">
+        <input id="userInput" type="text" placeholder="Posez votre question..." style="flex:1; padding: 12px; border: none; border-radius: 6px; background: #1e1e1e; color: #fff;" />
+        <button id="sendBtn" style="padding: 12px 20px; background: #007bff; color: white; border: none; border-radius: 6px; margin-left: 8px;">Envoyer</button>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const chatContainer = document.getElementById("chatContainer");
+        const userInput = document.getElementById("userInput");
+        const sendBtn = document.getElementById("sendBtn");
+
+        // Fonction pour ajouter un message stylé
+        function addMessage(content, sender) {
+            const wrapper = document.createElement("div");
+            wrapper.style.display = "flex";
+            wrapper.style.justifyContent = sender === "user" ? "flex-end" : "flex-start";
+            wrapper.style.margin = "10px 0";
+
+            const div = document.createElement("div");
+            div.style.padding = "12px";
+            div.style.borderRadius = "12px";
+            div.style.maxWidth = "80%";
+            div.style.whiteSpace = "pre-line";
+            div.style.wordWrap = "break-word";
+            div.style.fontSize = "15px";
+            div.style.background = sender === "user" ? "#007bff" : "#3a3a3a";
+            div.style.color = sender === "user" ? "#fff" : "#f1f1f1";
+            div.innerText = content;
+
+            wrapper.appendChild(div);
+            chatContainer.appendChild(wrapper);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // Envoi du message
+        async function sendMessage() {
+            const question = userInput.value;
+            if (!question.trim()) return;
+
+            addMessage(question, "user");
+            userInput.value = "";
+
+            // Indicateur "bot en train d'écrire"
+            const typingDiv = document.createElement("div");
+            typingDiv.innerText = "FNZ_ChatBot écrit...";
+            typingDiv.style.color = "#888";
+            typingDiv.style.margin = "5px 0";
+            chatContainer.appendChild(typingDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            // Appel API
+            const res = await fetch('/Chat/GetResponse', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(question)
+            });
+
+            chatContainer.removeChild(typingDiv);
+
+            if (res.ok) {
+                const data = await res.json();
+                addMessage(data.answer, "bot");
+            } else {
+                addMessage("Erreur : impossible d'obtenir une réponse.", "bot");
+            }
+        }
+
+        sendBtn.addEventListener("click", sendMessage);
+        userInput.addEventListener("keypress", (e) => { if (e.key === "Enter") sendMessage(); });
+    </script>
+}
