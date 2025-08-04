@@ -1,10 +1,9 @@
 ﻿using FNZ_ChatBot.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace FNZ_ChatBot.Services
 {
@@ -15,13 +14,22 @@ namespace FNZ_ChatBot.Services
             if (!File.Exists(filePath))
                 throw new FileNotFoundException($"Le fichier {filePath} est introuvable.");
 
-            string json = File.ReadAllText(filePath);
+            // Forcer l'encodage UTF‑8
+            string json = File.ReadAllText(filePath, Encoding.UTF8);
+
             var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             };
 
-            return JsonSerializer.Deserialize<List<Message>>(json, options) ?? new List<Message>();
+            try
+            {
+                return JsonSerializer.Deserialize<List<Message>>(json, options) ?? new List<Message>();
+            }
+            catch (JsonException ex)
+            {
+                throw new Exception($"Erreur lors du chargement du fichier JSON {filePath}: {ex.Message}");
+            }
         }
     }
 }

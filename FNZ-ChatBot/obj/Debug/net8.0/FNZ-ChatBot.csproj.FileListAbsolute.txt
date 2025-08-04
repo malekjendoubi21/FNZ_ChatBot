@@ -229,3 +229,4 @@ C:\Users\malek.jendoubi\Desktop\FNZ-ChatBot\FNZ-ChatBot\bin\Debug\net8.0\runtime
 C:\Users\malek.jendoubi\Desktop\FNZ-ChatBot\FNZ-ChatBot\obj\Debug\net8.0\FNZ-ChatBot.csproj.AssemblyReference.cache
 C:\Users\malek.jendoubi\Desktop\FNZ-ChatBot\FNZ-ChatBot\obj\Debug\net8.0\FNZ-Chat.10FEAF90.Up2Date
 C:\Users\malek.jendoubi\Desktop\FNZ-ChatBot\FNZ-ChatBot\bin\Debug\net8.0\data.json
+C:\Users\malek.jendoubi\Desktop\FNZ-ChatBot\FNZ-ChatBot\obj\Debug\net8.0\FNZ-ChatBot.sourcelink.json
