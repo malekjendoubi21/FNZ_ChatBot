@@ -1,0 +1,179 @@
+﻿@{
+    ViewData["Title"] = "Chatbot";
+}
+
+<style>
+    body {
+        background: linear-gradient(135deg, #121212, #1e1e1e);
+        color: #fff;
+        font-family: Arial, sans-serif;
+    }
+
+    #chatContainer {
+        width: 70%;
+        max-width: 900px;
+        height: 75vh;
+        margin: 30px auto;
+        padding: 20px;
+        border-radius: 12px;
+        background: #222;
+        overflow-y: auto;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    .message-wrapper {
+        display: flex;
+        margin: 10px 0;
+        align-items: flex-start;
+    }
+
+        .message-wrapper.user {
+            justify-content: flex-end;
+        }
+
+    .message-bubble {
+        padding: 14px 18px;
+        border-radius: 18px;
+        max-width: 70%;
+        font-size: 15px;
+        line-height: 1.4;
+        white-space: pre-line;
+    }
+
+    .user .message-bubble {
+        background: #007bff;
+        color: #fff;
+        border-bottom-right-radius: 4px;
+    }
+
+    .bot .message-bubble {
+        background: #333;
+        color: #f1f1f1;
+        border-bottom-left-radius: 4px;
+    }
+
+    .avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        margin-right: 8px;
+        background-size: cover;
+    }
+
+    .user .avatar {
+        display: none;
+    }
+
+    #inputBar {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 70%;
+        max-width: 900px;
+        display: flex;
+        background: #333;
+        border-radius: 8px;
+        padding: 10px;
+        margin-bottom: 15px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    #userInput {
+        flex: 1;
+        padding: 12px;
+        border: none;
+        border-radius: 6px;
+        background: #1e1e1e;
+        color: #fff;
+        font-size: 15px;
+    }
+
+    #sendBtn {
+        padding: 12px 20px;
+        margin-left: 8px;
+        background: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+        #sendBtn:hover {
+            background: #0056b3;
+        }
+
+    .typing-indicator {
+        font-size: 14px;
+        color: #888;
+        margin: 5px 0;
+        font-style: italic;
+    }
+</style>
+
+<div id="chatContainer"></div>
+
+<div id="inputBar">
+    <input id="userInput" type="text" placeholder="Posez votre question..." />
+    <button id="sendBtn">Envoyer</button>
+</div>
+
+@section Scripts {
+    <script>
+        const chatContainer = document.getElementById("chatContainer");
+        const userInput = document.getElementById("userInput");
+        const sendBtn = document.getElementById("sendBtn");
+
+        function addMessage(content, sender) {
+            const wrapper = document.createElement("div");
+            wrapper.className = "message-wrapper " + sender;
+
+            const bubble = document.createElement("div");
+            bubble.className = "message-bubble";
+            bubble.innerText = content;
+
+            if (sender === "bot") {
+                const avatar = document.createElement("div");
+                avatar.className = "avatar";
+                avatar.style.backgroundImage = "url('https://cdn-icons-png.flaticon.com/512/4712/4712100.png')";
+                wrapper.appendChild(avatar);
+            }
+
+            wrapper.appendChild(bubble);
+            chatContainer.appendChild(wrapper);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const question = userInput.value.trim();
+            if (!question) return;
+
+            addMessage(question, "user");
+            userInput.value = "";
+
+            const typingDiv = document.createElement("div");
+            typingDiv.className = "typing-indicator";
+            typingDiv.innerText = "FNZ_ChatBot écrit...";
+            chatContainer.appendChild(typingDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            const res = await fetch('/Chat/GetResponse', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(question)
+            });
+
+            chatContainer.removeChild(typingDiv);
+
+            if (res.ok) {
+                const data = await res.json();
+                addMessage(data.answer, "bot");
+            } else {
+                addMessage("Erreur : impossible d'obtenir une réponse.", "bot");
+            }
+        }
+
+        sendBtn.addEventListener("click", sendMessage);
+        userInput.addEventListener("keypress", (e) => { if (e.key === "Enter") sendMessage(); });
+    </script>
+}

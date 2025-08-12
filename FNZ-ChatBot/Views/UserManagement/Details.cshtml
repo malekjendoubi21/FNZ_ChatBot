@@ -1,0 +1,102 @@
+@model ApplicationUser
+@{
+    ViewData["Title"] = "Détails de l'utilisateur";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Détails de l'utilisateur</h2>
+                <a href="@Url.Action("Index")" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Retour à la liste
+                </a>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-user"></i> Informations personnelles</h5>
+                        </div>
+                        <div class="card-body">
+                            <dl class="row">
+                                <dt class="col-sm-4">Nom complet :</dt>
+                                <dd class="col-sm-8">@Model.FirstName @Model.LastName</dd>
+                                
+                                <dt class="col-sm-4">Email :</dt>
+                                <dd class="col-sm-8">@Model.Email</dd>
+                                
+                                <dt class="col-sm-4">Nom d'utilisateur :</dt>
+                                <dd class="col-sm-8">@Model.UserName</dd>
+                                
+                                <dt class="col-sm-4">Rôle :</dt>
+                                <dd class="col-sm-8">
+                                    @if (Model.IsAdmin)
+                                    {
+                                        <span class="badge bg-success">Administrateur</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-primary">Utilisateur</span>
+                                    }
+                                </dd>
+                                
+                                <dt class="col-sm-4">Date de création :</dt>
+                                <dd class="col-sm-8">@Model.CreatedDate.ToString("dd/MM/yyyy HH:mm")</dd>
+                                
+                                <dt class="col-sm-4">Email confirmé :</dt>
+                                <dd class="col-sm-8">
+                                    @if (Model.EmailConfirmed)
+                                    {
+                                        <span class="badge bg-success">Oui</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-warning">Non</span>
+                                    }
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-cogs"></i> Actions administratives</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-grid gap-2">
+                                <a asp-action="ConversationHistory" asp-route-id="@Model.Id" class="btn btn-outline-primary">
+                                    <i class="fas fa-history"></i> Voir l'historique des conversations
+                                </a>
+                                
+                                <form asp-action="ToggleAdmin" asp-route-id="@Model.Id" method="post" class="d-inline">
+                                    @if (Model.IsAdmin)
+                                    {
+                                        <button type="submit" class="btn btn-outline-warning w-100" onclick="return confirm('Retirer les privilèges administrateur ?')">
+                                            <i class="fas fa-user-minus"></i> Retirer les privilèges admin
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button type="submit" class="btn btn-outline-success w-100" onclick="return confirm('Promouvoir en administrateur ?')">
+                                            <i class="fas fa-user-plus"></i> Promouvoir en administrateur
+                                        </button>
+                                    }
+                                </form>
+                                
+                                <form asp-action="Delete" asp-route-id="@Model.Id" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-outline-danger w-100" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ? Cette action est irréversible.')">
+                                        <i class="fas fa-trash"></i> Supprimer l'utilisateur
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

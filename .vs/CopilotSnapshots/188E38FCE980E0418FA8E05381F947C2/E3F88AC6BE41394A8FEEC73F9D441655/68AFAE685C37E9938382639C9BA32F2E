@@ -1,0 +1,23 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace FNZ_ChatBot.Models
+{
+    public class ConversationHistory
+    {
+        public int Id { get; set; }
+        
+        [Required]
+        public string UserId { get; set; } = string.Empty;
+        
+        [Required]
+        public string Question { get; set; } = string.Empty;
+        
+        [Required]
+        public string Response { get; set; } = string.Empty;
+        
+        public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
+        
+        // Navigation property
+        public virtual ApplicationUser User { get; set; } = null!;
+    }
+}

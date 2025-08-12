@@ -1,0 +1,62 @@
+﻿using FNZ_ChatBot.Models;
+using System.Text.RegularExpressions;
+
+namespace FNZ_ChatBot.Services
+{
+    public class ChatService : IChatService
+    {
+        private readonly SemanticSearch _semanticSearch;
+
+        public ChatService(string jsonFilePath)
+        {
+            // Charger la base de connaissances depuis le JSON
+            var messages = JsonLoader.LoadMessages(jsonFilePath)
+                .Select(m => new QuestionEntry { Question = m.Question, Response = m.Response })
+                .ToList();
+
+            // Initialiser la recherche sémantique
+            _semanticSearch = new SemanticSearch(messages);
+        }
+
+        public string GetResponse(string userInput)
+        {
+            if (string.IsNullOrWhiteSpace(userInput))
+                return "Veuillez entrer une question.";
+
+            // Gestion des salutations
+            var greetings = new[] { "bonjour", "salut", "hello", "hey", "coucou" };
+            if (greetings.Any(g => userInput.ToLower().Contains(g)))
+                return "Bonjour ! Comment puis-je vous aider ?";
+
+            // Découper en sous-questions
+            var subQuestions = SplitQuestions(userInput);
+
+            var responses = new List<string>();
+            foreach (var question in subQuestions)
+            {
+                var results = _semanticSearch.Search(question, 2, 0.5f); // top 2 avec seuil 0.5
+                if (results.Any())
+                {
+                    responses.Add($"**Question :** {question}\n" +
+                                  string.Join("\n", results.Select(r => "- " + r.Response)));
+                }
+            }
+
+            return responses.Any()
+                ? string.Join("\n\n", responses)
+                : "Désolé, je ne connais pas encore la réponse à cette question.";
+        }
+
+        // Découpe une entrée utilisateur en sous-questions
+        private List<string> SplitQuestions(string input)
+        {
+            var rawParts = Regex.Split(input, @"\?| et | puis |&|\n|-", RegexOptions.IgnoreCase)
+                                .Select(q => q.Trim())
+                                .Where(q => !string.IsNullOrWhiteSpace(q))
+                                .ToList();
+
+            var filteredParts = rawParts.Where(q => q.Split(' ').Length >= 4).ToList();
+            return filteredParts.Any() ? filteredParts : new List<string> { input };
+        }
+    }
+}

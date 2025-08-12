@@ -1,0 +1,21 @@
+﻿{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=FNZChatBotDb;Trusted_Connection=true;MultipleActiveResultSets=true"
+  },
+  "EmailSettings": {
+    "FromName": "FNZ ChatBot",
+    "FromEmail": "malekeljendoubi@gmail.com",
+    "UseRealSmtp": "true",
+    "SmtpServer": "smtp.gmail.com",
+    "Port": "587",
+    "Username": "malekeljendoubi@gmail.com",
+    "Password": "votre-mot-de-passe-app-gmail"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*"
+}

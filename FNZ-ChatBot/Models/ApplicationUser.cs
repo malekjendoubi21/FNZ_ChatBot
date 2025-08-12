@@ -1,0 +1,18 @@
+using Microsoft.AspNetCore.Identity;
+
+namespace FNZ_ChatBot.Models
+{
+    public class ApplicationUser : IdentityUser
+    {
+        public string FirstName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
+        public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
+        public bool IsAdmin { get; set; } = false;
+        public bool MustChangePassword { get; set; } = false;
+        public DateTime? LastPasswordChange { get; set; }
+        
+        // Navigation properties
+        public virtual ICollection<ConversationHistory> ConversationHistory { get; set; } = new List<ConversationHistory>();
+        public virtual ICollection<Conversation> Conversations { get; set; } = new List<Conversation>();
+    }
+}

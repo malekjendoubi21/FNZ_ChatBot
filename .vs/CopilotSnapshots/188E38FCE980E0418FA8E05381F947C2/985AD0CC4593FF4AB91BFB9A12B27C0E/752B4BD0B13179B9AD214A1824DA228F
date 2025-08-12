@@ -1,0 +1,129 @@
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using FNZ_ChatBot.Models;
+
+namespace FNZ_ChatBot.Controllers
+{
+    public class AccountController : Controller
+    {
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly ILogger<AccountController> _logger;
+
+        public AccountController(
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
+            ILogger<AccountController> logger)
+        {
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _logger = logger;
+        }
+
+        [HttpGet]
+        public IActionResult Login(string? returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel model, string? returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation("Utilisateur connecté.");
+                    return RedirectToLocal(returnUrl);
+                }
+                
+                ModelState.AddModelError(string.Empty, "Tentative de connexion invalide.");
+            }
+
+            return View(model);
+        }
+
+        // Seuls les administrateurs peuvent créer des comptes
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    IsAdmin = model.IsAdmin,
+                    CreatedDate = DateTime.UtcNow,
+                    EmailConfirmed = true // Auto-confirmer les emails créés par l'admin
+                };
+
+                var result = await _userManager.CreateAsync(user, model.Password);
+                
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation("Utilisateur créé par l'administrateur.");
+                    
+                    // Ajouter le rôle approprié
+                    if (model.IsAdmin)
+                    {
+                        await _userManager.AddToRoleAsync(user, "Admin");
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, "User");
+                    }
+
+                    TempData["Success"] = $"Utilisateur {user.Email} créé avec succès.";
+                    return RedirectToAction("Index", "UserManagement");
+                }
+                
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            _logger.LogInformation("Utilisateur déconnecté.");
+            return RedirectToAction("Index", "Home");
+        }
+
+        private IActionResult RedirectToLocal(string? returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Chat");
+            }
+        }
+    }
+}

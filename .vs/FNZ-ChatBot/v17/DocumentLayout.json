@@ -3,8 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\views\\chat\\getresponse.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\views\\chat\\getresponse.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\controllers\\usermanagementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\controllers\\usermanagementcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\views\\usermanagement\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\views\\usermanagement\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -15,36 +31,156 @@
       "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\data.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\data.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\views\\knowledgebase\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\views\\knowledgebase\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\services\\chatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\services\\chatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\views\\knowledgebase\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\views\\knowledgebase\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\views\\knowledgebase\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\views\\knowledgebase\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\views\\knowledgebase\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\views\\knowledgebase\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\services\\jsonloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\services\\jsonloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\services\\ichatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\services\\ichatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\services\\embeddingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\services\\embeddingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\services\\semanticchatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\services\\semanticchatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\services\\passwordgeneratorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\services\\passwordgeneratorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\views\\usermanagement\\adduser.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\views\\usermanagement\\adduser.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\controllers\\knowledgebasecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\controllers\\knowledgebasecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\services\\jsonloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\services\\jsonloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\services\\semanticsearch.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\services\\semanticsearch.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\models\\usermanagementviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\models\\usermanagementviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\models\\registerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\models\\registerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\models\\questioninput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\models\\questioninput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\models\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\models\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\models\\knowledgebase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\models\\knowledgebase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\models\\conversation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\models\\conversation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\models\\conversationhistory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\models\\conversationhistory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\data.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\data.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\views\\chat\\getresponse.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\views\\chat\\getresponse.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\views\\chat\\myconversations.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\views\\chat\\myconversations.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\views\\usermanagement\\conversationhistory.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\views\\usermanagement\\conversationhistory.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\views\\usermanagement\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\views\\usermanagement\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\data\\seeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\data\\seeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\services\\chatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\services\\chatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\views\\account\\accessdenied.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\views\\account\\accessdenied.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\services\\ichatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\services\\ichatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -55,16 +191,24 @@
       "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\models\\changepasswordviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\models\\changepasswordviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\views\\account\\changepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\views\\account\\changepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\models\\emailsettingsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\models\\emailsettingsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|c:\\users\\malek.jendoubi\\desktop\\fnz-chatbot\\fnz-chatbot\\middleware\\forcepasswordchangemiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{12989BAC-338A-4624-9150-F08A58A33475}|FNZ-ChatBot\\FNZ-ChatBot.csproj|solutionrelative:fnz-chatbot\\middleware\\forcepasswordchangemiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -74,88 +218,23 @@
       "DocumentGroups": [
         {
           "DockedWidth": 238,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ChatController.cs",
-              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Controllers\\ChatController.cs",
-              "RelativeDocumentMoniker": "FNZ-ChatBot\\Controllers\\ChatController.cs",
-              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Controllers\\ChatController.cs",
-              "RelativeToolTip": "FNZ-ChatBot\\Controllers\\ChatController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T10:57:34.716Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ChatService.cs",
-              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Services\\ChatService.cs",
-              "RelativeDocumentMoniker": "FNZ-ChatBot\\Services\\ChatService.cs",
-              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Services\\ChatService.cs",
-              "RelativeToolTip": "FNZ-ChatBot\\Services\\ChatService.cs",
-              "ViewState": "AgIAAFMAAAAAAAAAAAAiwGcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T10:56:01.603Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "_ViewStart.cshtml",
-              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\_ViewStart.cshtml",
-              "RelativeDocumentMoniker": "FNZ-ChatBot\\Views\\_ViewStart.cshtml",
-              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\_ViewStart.cshtml",
-              "RelativeToolTip": "FNZ-ChatBot\\Views\\_ViewStart.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 7,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\KnowledgeBase\\Create.cshtml",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Views\\KnowledgeBase\\Create.cshtml",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\KnowledgeBase\\Create.cshtml",
+              "RelativeToolTip": "FNZ-ChatBot\\Views\\KnowledgeBase\\Create.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACwAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-29T11:04:19.344Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "IChatService.cs",
-              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Services\\IChatService.cs",
-              "RelativeDocumentMoniker": "FNZ-ChatBot\\Services\\IChatService.cs",
-              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Services\\IChatService.cs",
-              "RelativeToolTip": "FNZ-ChatBot\\Services\\IChatService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T10:56:30.699Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-12T11:11:44.67Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "FNZ-ChatBot\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "FNZ-ChatBot\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T10:57:13.771Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "data.json",
-              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\data.json",
-              "RelativeDocumentMoniker": "FNZ-ChatBot\\data.json",
-              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\data.json",
-              "RelativeToolTip": "FNZ-ChatBot\\data.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEsAAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-07-29T11:01:59.831Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "Privacy.cshtml",
               "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\Home\\Privacy.cshtml",
               "RelativeDocumentMoniker": "FNZ-ChatBot\\Views\\Home\\Privacy.cshtml",
@@ -163,99 +242,361 @@
               "RelativeToolTip": "FNZ-ChatBot\\Views\\Home\\Privacy.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-29T11:04:08.323Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-29T11:04:08.323Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "FNZ-ChatBot\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "FNZ-ChatBot\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-29T11:01:10.642Z",
-              "EditorCaption": ""
+              "DocumentIndex": 4,
+              "Title": "ChatController.cs",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Controllers\\ChatController.cs",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Controllers\\ChatController.cs",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Controllers\\ChatController.cs",
+              "RelativeToolTip": "FNZ-ChatBot\\Controllers\\ChatController.cs",
+              "ViewState": "AgIAAOkAAAAAAAAAAAAAAOkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T10:57:34.716Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EmailService.cs",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Services\\EmailService.cs",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Services\\EmailService.cs",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Services\\EmailService.cs",
+              "RelativeToolTip": "FNZ-ChatBot\\Services\\EmailService.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAQwDAAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-12T12:29:08.562Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "GetResponse.cshtml",
-              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\Chat\\GetResponse.cshtml",
-              "RelativeDocumentMoniker": "FNZ-ChatBot\\Views\\Chat\\GetResponse.cshtml",
-              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\Chat\\GetResponse.cshtml*",
-              "RelativeToolTip": "FNZ-ChatBot\\Views\\Chat\\GetResponse.cshtml*",
-              "ViewState": "AgIAAJgAAAAAAAAAAAAgwLMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-29T11:00:57.622Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "JsonLoader.cs",
-              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Services\\JsonLoader.cs",
-              "RelativeDocumentMoniker": "FNZ-ChatBot\\Services\\JsonLoader.cs",
-              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Services\\JsonLoader.cs",
-              "RelativeToolTip": "FNZ-ChatBot\\Services\\JsonLoader.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T10:56:33.213Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Program.cs",
-              "RelativeDocumentMoniker": "FNZ-ChatBot\\Program.cs",
-              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Program.cs",
-              "RelativeToolTip": "FNZ-ChatBot\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-29T11:01:06.408Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "_ViewImports.cshtml",
-              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\_ViewImports.cshtml",
-              "RelativeDocumentMoniker": "FNZ-ChatBot\\Views\\_ViewImports.cshtml",
-              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\_ViewImports.cshtml",
-              "RelativeToolTip": "FNZ-ChatBot\\Views\\_ViewImports.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-29T11:04:20.167Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "FNZ-ChatBot\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "FNZ-ChatBot\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAACIAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-29T11:06:04.306Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\appsettings.json",
               "RelativeDocumentMoniker": "FNZ-ChatBot\\appsettings.json",
               "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\appsettings.json",
               "RelativeToolTip": "FNZ-ChatBot\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-07-29T11:05:04.471Z"
+              "WhenOpened": "2025-07-29T11:05:04.471Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\UserManagement\\Index.cshtml",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Views\\UserManagement\\Index.cshtml",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\UserManagement\\Index.cshtml",
+              "RelativeToolTip": "FNZ-ChatBot\\Views\\UserManagement\\Index.cshtml",
+              "ViewState": "AgIAABUAAAAAAAAAAAAgwKoAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-12T10:53:13.634Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UserManagementController.cs",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Controllers\\UserManagementController.cs",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Controllers\\UserManagementController.cs",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Controllers\\UserManagementController.cs",
+              "RelativeToolTip": "FNZ-ChatBot\\Controllers\\UserManagementController.cs",
+              "ViewState": "AgIAADkAAAAAAAAAAAAYwA0AAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-12T10:51:14.401Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "ForcePasswordChangeMiddleware.cs",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Middleware\\ForcePasswordChangeMiddleware.cs",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Middleware\\ForcePasswordChangeMiddleware.cs",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Middleware\\ForcePasswordChangeMiddleware.cs",
+              "RelativeToolTip": "FNZ-ChatBot\\Middleware\\ForcePasswordChangeMiddleware.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-12T12:57:37.195Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\KnowledgeBase\\Details.cshtml",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Views\\KnowledgeBase\\Details.cshtml",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\KnowledgeBase\\Details.cshtml",
+              "RelativeToolTip": "FNZ-ChatBot\\Views\\KnowledgeBase\\Details.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFQAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-12T11:15:09.887Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\KnowledgeBase\\Edit.cshtml",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Views\\KnowledgeBase\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\KnowledgeBase\\Edit.cshtml",
+              "RelativeToolTip": "FNZ-ChatBot\\Views\\KnowledgeBase\\Edit.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADwAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-12T11:14:54.355Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\KnowledgeBase\\Index.cshtml",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Views\\KnowledgeBase\\Index.cshtml",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\KnowledgeBase\\Index.cshtml",
+              "RelativeToolTip": "FNZ-ChatBot\\Views\\KnowledgeBase\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAALEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-12T11:11:25.801Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "FNZ-ChatBot\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAAAG8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T11:06:04.306Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "_ValidationScriptsPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeToolTip": "FNZ-ChatBot\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-12T12:52:47.138Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "FNZ-ChatBot\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAD0AAAAAAAAAAAAAAEQAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T11:01:10.642Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Error.cshtml",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\Shared\\Error.cshtml",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Views\\Shared\\Error.cshtml",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\Shared\\Error.cshtml",
+              "RelativeToolTip": "FNZ-ChatBot\\Views\\Shared\\Error.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-12T12:52:46.165Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 14,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Program.cs",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Program.cs",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Program.cs",
+              "RelativeToolTip": "FNZ-ChatBot\\Program.cs",
+              "ViewState": "AgIAAEAAAAAAAAAAAAArwFUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T11:01:06.408Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "SemanticSearch.cs",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Services\\SemanticSearch.cs",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Services\\SemanticSearch.cs",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Services\\SemanticSearch.cs",
+              "RelativeToolTip": "FNZ-ChatBot\\Services\\SemanticSearch.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-04T10:08:54.587Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "EmailSettingsViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Models\\EmailSettingsViewModel.cs",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Models\\EmailSettingsViewModel.cs",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Models\\EmailSettingsViewModel.cs",
+              "RelativeToolTip": "FNZ-ChatBot\\Models\\EmailSettingsViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-12T12:49:14.562Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "PasswordGeneratorService.cs",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Services\\PasswordGeneratorService.cs",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Services\\PasswordGeneratorService.cs",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Services\\PasswordGeneratorService.cs",
+              "RelativeToolTip": "FNZ-ChatBot\\Services\\PasswordGeneratorService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-12T12:29:24.622Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "SemanticChatService.cs",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Services\\SemanticChatService.cs",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Services\\SemanticChatService.cs",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Services\\SemanticChatService.cs",
+              "RelativeToolTip": "FNZ-ChatBot\\Services\\SemanticChatService.cs",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAAAE0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-04T09:51:39.891Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "EmbeddingService.cs",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Services\\EmbeddingService.cs",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Services\\EmbeddingService.cs",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Services\\EmbeddingService.cs",
+              "RelativeToolTip": "FNZ-ChatBot\\Services\\EmbeddingService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-04T09:51:22.222Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "ChangePasswordViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Models\\ChangePasswordViewModel.cs",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Models\\ChangePasswordViewModel.cs",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Models\\ChangePasswordViewModel.cs",
+              "RelativeToolTip": "FNZ-ChatBot\\Models\\ChangePasswordViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-12T12:29:34.678Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "ChangePassword.cshtml",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\Account\\ChangePassword.cshtml",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Views\\Account\\ChangePassword.cshtml",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\Account\\ChangePassword.cshtml",
+              "RelativeToolTip": "FNZ-ChatBot\\Views\\Account\\ChangePassword.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-12T12:32:01.931Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "KnowledgeBaseController.cs",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Controllers\\KnowledgeBaseController.cs",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Controllers\\KnowledgeBaseController.cs",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Controllers\\KnowledgeBaseController.cs",
+              "RelativeToolTip": "FNZ-ChatBot\\Controllers\\KnowledgeBaseController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-12T11:06:20.965Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "FNZ-ChatBot\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T10:57:13.771Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "FNZ-ChatBot\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAHMAAAAAAAAAAADgv4oAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-12T10:50:55.081Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "AddUser.cshtml",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\UserManagement\\AddUser.cshtml",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Views\\UserManagement\\AddUser.cshtml",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\UserManagement\\AddUser.cshtml",
+              "RelativeToolTip": "FNZ-ChatBot\\Views\\UserManagement\\AddUser.cshtml",
+              "ViewState": "AgIAAEYAAAAAAAAAAIAwwGIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-12T12:23:29.382Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "JsonLoader.cs",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Services\\JsonLoader.cs",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Services\\JsonLoader.cs",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Services\\JsonLoader.cs",
+              "RelativeToolTip": "FNZ-ChatBot\\Services\\JsonLoader.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T10:56:33.213Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "UserManagementViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Models\\UserManagementViewModel.cs",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Models\\UserManagementViewModel.cs",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Models\\UserManagementViewModel.cs",
+              "RelativeToolTip": "FNZ-ChatBot\\Models\\UserManagementViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-12T10:50:33.833Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "RegisterViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Models\\RegisterViewModel.cs",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Models\\RegisterViewModel.cs",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Models\\RegisterViewModel.cs",
+              "RelativeToolTip": "FNZ-ChatBot\\Models\\RegisterViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-12T10:50:29.318Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "QuestionInput.cs",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Models\\QuestionInput.cs",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Models\\QuestionInput.cs",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Models\\QuestionInput.cs",
+              "RelativeToolTip": "FNZ-ChatBot\\Models\\QuestionInput.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-04T09:56:00.277Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
               "Title": "Message.cs",
               "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Models\\Message.cs",
               "RelativeDocumentMoniker": "FNZ-ChatBot\\Models\\Message.cs",
@@ -267,13 +608,241 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 28,
+              "Title": "LoginViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Models\\LoginViewModel.cs",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Models\\LoginViewModel.cs",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Models\\LoginViewModel.cs",
+              "RelativeToolTip": "FNZ-ChatBot\\Models\\LoginViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-12T10:50:22.196Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "KnowledgeBase.cs",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Models\\KnowledgeBase.cs",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Models\\KnowledgeBase.cs",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Models\\KnowledgeBase.cs",
+              "RelativeToolTip": "FNZ-ChatBot\\Models\\KnowledgeBase.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-12T11:04:29.882Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Conversation.cs",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Models\\Conversation.cs",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Models\\Conversation.cs",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Models\\Conversation.cs",
+              "RelativeToolTip": "FNZ-ChatBot\\Models\\Conversation.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-12T11:04:37.409Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "ConversationHistory.cs",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Models\\ConversationHistory.cs",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Models\\ConversationHistory.cs",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Models\\ConversationHistory.cs",
+              "RelativeToolTip": "FNZ-ChatBot\\Models\\ConversationHistory.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAEwBkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-12T10:50:17.021Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "ApplicationUser.cs",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Models\\ApplicationUser.cs",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Models\\ApplicationUser.cs",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Models\\ApplicationUser.cs",
+              "RelativeToolTip": "FNZ-ChatBot\\Models\\ApplicationUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-12T10:50:11.456Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "data.json",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\data.json",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\data.json",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\data.json",
+              "RelativeToolTip": "FNZ-ChatBot\\data.json",
+              "ViewState": "AgIAADkAAAAAAAAAAAAAAE4AAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-07-29T11:01:59.831Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "GetResponse.cshtml",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\Chat\\GetResponse.cshtml",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Views\\Chat\\GetResponse.cshtml",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\Chat\\GetResponse.cshtml",
+              "RelativeToolTip": "FNZ-ChatBot\\Views\\Chat\\GetResponse.cshtml",
+              "ViewState": "AgIAAGMBAAAAAAAAAAAAAIoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T11:00:57.622Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "MyConversations.cshtml",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\Chat\\MyConversations.cshtml",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Views\\Chat\\MyConversations.cshtml",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\Chat\\MyConversations.cshtml",
+              "RelativeToolTip": "FNZ-ChatBot\\Views\\Chat\\MyConversations.cshtml",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAAAFoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-12T11:13:40.824Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "ConversationHistory.cshtml",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\UserManagement\\ConversationHistory.cshtml",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Views\\UserManagement\\ConversationHistory.cshtml",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\UserManagement\\ConversationHistory.cshtml",
+              "RelativeToolTip": "FNZ-ChatBot\\Views\\UserManagement\\ConversationHistory.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFAAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-12T10:53:27.446Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\UserManagement\\Details.cshtml",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Views\\UserManagement\\Details.cshtml",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\UserManagement\\Details.cshtml",
+              "RelativeToolTip": "FNZ-ChatBot\\Views\\UserManagement\\Details.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGUAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-12T10:57:42.476Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Views\\Account\\Login.cshtml",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\Account\\Login.cshtml",
+              "RelativeToolTip": "FNZ-ChatBot\\Views\\Account\\Login.cshtml",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABgAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-12T10:52:39.19Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "SeedData.cs",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Data\\SeedData.cs",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Data\\SeedData.cs",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Data\\SeedData.cs",
+              "RelativeToolTip": "FNZ-ChatBot\\Data\\SeedData.cs",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAhwGAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-12T10:52:21.933Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "ErrorViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Models\\ErrorViewModel.cs",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Models\\ErrorViewModel.cs",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Models\\ErrorViewModel.cs",
+              "RelativeToolTip": "FNZ-ChatBot\\Models\\ErrorViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-12T10:59:09.752Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "FNZ-ChatBot\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAhwEAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-12T10:50:40.964Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "ChatService.cs",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Services\\ChatService.cs",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Services\\ChatService.cs",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Services\\ChatService.cs",
+              "RelativeToolTip": "FNZ-ChatBot\\Services\\ChatService.cs",
+              "ViewState": "AgIAAGAAAAAAAAAAAAAvwE4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T10:56:01.603Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "AccessDenied.cshtml",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\Account\\AccessDenied.cshtml",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Views\\Account\\AccessDenied.cshtml",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\Account\\AccessDenied.cshtml",
+              "RelativeToolTip": "FNZ-ChatBot\\Views\\Account\\AccessDenied.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-12T10:57:54.841Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "IChatService.cs",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Services\\IChatService.cs",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Services\\IChatService.cs",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Services\\IChatService.cs",
+              "RelativeToolTip": "FNZ-ChatBot\\Services\\IChatService.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAMBUwAgAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-29T10:56:30.699Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Views\\_ViewStart.cshtml",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\_ViewStart.cshtml",
+              "RelativeToolTip": "FNZ-ChatBot\\Views\\_ViewStart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T11:04:19.344Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "FNZ-ChatBot\\Views\\_ViewImports.cshtml",
+              "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Views\\_ViewImports.cshtml",
+              "RelativeToolTip": "FNZ-ChatBot\\Views\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-29T11:04:20.167Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "FNZ-ChatBot\\Properties\\launchSettings.json",
               "ToolTip": "C:\\Users\\malek.jendoubi\\Desktop\\FNZ-ChatBot\\FNZ-ChatBot\\Properties\\launchSettings.json",
               "RelativeToolTip": "FNZ-ChatBot\\Properties\\launchSettings.json",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAcAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAAIAAAAAAAAAAABRwAcAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-07-29T10:52:35.996Z"
             }

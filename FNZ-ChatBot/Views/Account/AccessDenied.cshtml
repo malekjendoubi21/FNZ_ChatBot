@@ -1,0 +1,27 @@
+@{
+    ViewData["Title"] = "Accès refusé";
+}
+
+<div class="text-center">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <i class="fas fa-ban fa-5x text-danger mb-4"></i>
+                    <h1 class="card-title text-danger">Accès refusé</h1>
+                    <p class="card-text">Vous n'avez pas les permissions nécessaires pour accéder à cette page.</p>
+                    <p class="text-muted">Si vous pensez qu'il s'agit d'une erreur, veuillez contacter votre administrateur.</p>
+                    
+                    <div class="mt-4">
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-primary">
+                            <i class="fas fa-home"></i> Retour à l'accueil
+                        </a>
+                        <a href="javascript:history.back()" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Retour
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

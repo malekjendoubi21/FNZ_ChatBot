@@ -1,0 +1,280 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using FNZ_ChatBot.Data;
+using FNZ_ChatBot.Models;
+using FNZ_ChatBot.Services;
+
+namespace FNZ_ChatBot.Controllers
+{
+    [Authorize]
+    public class UserManagementController : Controller
+    {
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ApplicationDbContext _context;
+        private readonly ILogger<UserManagementController> _logger;
+        private readonly IEmailService _emailService;
+        private readonly IPasswordGeneratorService _passwordGenerator;
+
+        public UserManagementController(
+            UserManager<ApplicationUser> userManager,
+            ApplicationDbContext context,
+            ILogger<UserManagementController> logger,
+            IEmailService emailService,
+            IPasswordGeneratorService passwordGenerator)
+        {
+            _userManager = userManager;
+            _context = context;
+            _logger = logger;
+            _emailService = emailService;
+            _passwordGenerator = passwordGenerator;
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Index()
+        {
+            var users = await _userManager.Users.ToListAsync();
+            var totalUsers = users.Count;
+            var adminUsers = 0;
+            var regularUsers = 0;
+
+            foreach (var user in users)
+            {
+                if (await _userManager.IsInRoleAsync(user, "Admin"))
+                    adminUsers++;
+                else
+                    regularUsers++;
+            }
+
+            var viewModel = new UserManagementViewModel
+            {
+                Users = users,
+                TotalUsers = totalUsers,
+                AdminUsers = adminUsers,
+                RegularUsers = regularUsers
+            };
+
+            return View(viewModel);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Details(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return NotFound();
+            }
+
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
+        }
+
+        // GET: UserManagement/AddUser
+        [Authorize(Roles = "Admin")]
+        public IActionResult AddUser()
+        {
+            return View();
+        }
+
+        // POST: UserManagement/AddUser
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> AddUser(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Générer un mot de passe temporaire sécurisé
+                var tempPassword = _passwordGenerator.GenerateSecurePassword();
+                
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    IsAdmin = model.IsAdmin,
+                    CreatedDate = DateTime.UtcNow,
+                    EmailConfirmed = true,
+                    MustChangePassword = true, // Forcer le changement de mot de passe
+                    LastPasswordChange = null
+                };
+
+                var result = await _userManager.CreateAsync(user, tempPassword);
+                
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation("Utilisateur créé par l'administrateur : {Email}", user.Email);
+                    
+                    // Ajouter le rôle approprié
+                    if (model.IsAdmin)
+                    {
+                        await _userManager.AddToRoleAsync(user, "Admin");
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, "User");
+                    }
+
+                    // Envoyer l'email avec les identifiants
+                    var emailSent = false;
+                    try
+                    {
+                        await _emailService.SendNewUserCredentialsAsync(
+                            user.Email, 
+                            user.FirstName, 
+                            user.LastName, 
+                            tempPassword
+                        );
+                        emailSent = true;
+                        _logger.LogInformation("Email envoyé avec succès à {Email}", user.Email);
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, "Erreur lors de l'envoi de l'email à {Email}", user.Email);
+                        emailSent = false;
+                    }
+
+                    // Message de succès avec informations appropriées
+                    if (emailSent)
+                    {
+                        if (_configuration["EmailSettings:UseRealSmtp"] == "true")
+                        {
+                            TempData["Success"] = $"✅ Utilisateur {user.Email} créé avec succès. Un email avec les identifiants a été envoyé.";
+                        }
+                        else
+                        {
+                            TempData["Success"] = $"✅ Utilisateur {user.Email} créé avec succès. L'email simulé est visible dans les logs de l'application.";
+                            TempData["TempPassword"] = tempPassword; // Pour affichage temporaire en mode dev
+                        }
+                    }
+                    else
+                    {
+                        TempData["Warning"] = $"⚠️ Utilisateur {user.Email} créé avec succès, mais l'email n'a pas pu être envoyé.";
+                        TempData["TempPassword"] = tempPassword; // Afficher le mot de passe temporaire
+                        TempData["EmailError"] = "Vérifiez la configuration SMTP ou utilisez le mode simulation.";
+                    }
+                    
+                    return RedirectToAction(nameof(Index));
+                }
+                
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+
+            return View(model);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ToggleAdmin(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var isAdmin = await _userManager.IsInRoleAsync(user, "Admin");
+            
+            if (isAdmin)
+            {
+                await _userManager.RemoveFromRoleAsync(user, "Admin");
+                await _userManager.AddToRoleAsync(user, "User");
+                user.IsAdmin = false;
+            }
+            else
+            {
+                await _userManager.RemoveFromRoleAsync(user, "User");
+                await _userManager.AddToRoleAsync(user, "Admin");
+                user.IsAdmin = true;
+            }
+
+            await _userManager.UpdateAsync(user);
+            
+            return RedirectToAction(nameof(Index));
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            // Ne pas permettre la suppression du dernier administrateur
+            var adminUsers = await _userManager.GetUsersInRoleAsync("Admin");
+            if (await _userManager.IsInRoleAsync(user, "Admin") && adminUsers.Count <= 1)
+            {
+                TempData["Error"] = "Impossible de supprimer le dernier administrateur.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            var result = await _userManager.DeleteAsync(user);
+            if (result.Succeeded)
+            {
+                TempData["Success"] = "Utilisateur supprimé avec succès.";
+            }
+            else
+            {
+                TempData["Error"] = "Erreur lors de la suppression de l'utilisateur.";
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        // Voir l'historique des conversations d'un utilisateur
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> ConversationHistory(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return NotFound();
+            }
+
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var conversations = await _context.ConversationHistory
+                .Where(c => c.UserId == id)
+                .OrderByDescending(c => c.CreatedDate)
+                .ToListAsync();
+
+            ViewData["UserName"] = $"{user.FirstName} {user.LastName}";
+            return View(conversations);
+        }
+
+        // Voir son propre historique
+        public async Task<IActionResult> MyHistory()
+        {
+            var userId = _userManager.GetUserId(User);
+            if (string.IsNullOrEmpty(userId))
+            {
+                return Unauthorized();
+            }
+
+            var conversations = await _context.ConversationHistory
+                .Where(c => c.UserId == userId)
+                .OrderByDescending(c => c.CreatedDate)
+                .ToListAsync();
+
+            return View("ConversationHistory", conversations);
+        }
+    }
+}

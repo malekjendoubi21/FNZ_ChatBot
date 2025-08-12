@@ -1,0 +1,75 @@
+﻿using FNZ_ChatBot.Models;
+using FNZ_ChatBot.Services;
+using FNZ_ChatBot.Data;
+
+public class SemanticChatService : IChatService
+{
+    private readonly List<(Message message, float[] embedding)> _knowledgeBase;
+    private readonly EmbeddingService _embeddingService;
+    private readonly ApplicationDbContext _context;
+
+    public SemanticChatService(string modelPath, string jsonFile, ApplicationDbContext context)
+    {
+        _embeddingService = new EmbeddingService(modelPath);
+        _context = context;
+        var messages = JsonLoader.LoadMessages(jsonFile);
+
+        _knowledgeBase = messages
+            .Select(m => (m, _embeddingService.GetEmbedding(m.Question)))
+            .ToList();
+    }
+
+    public string GetResponse(string userInput)
+    {
+        return GetResponseInternal(userInput);
+    }
+
+    public async Task<string> GetResponseAsync(string userInput, string? userId = null)
+    {
+        var response = GetResponseInternal(userInput);
+        
+        // Enregistrer dans l'historique si un utilisateur est connecté
+        if (!string.IsNullOrEmpty(userId))
+        {
+            var conversationHistory = new ConversationHistory
+            {
+                UserId = userId,
+                Question = userInput,
+                Response = response,
+                CreatedDate = DateTime.UtcNow
+            };
+
+            _context.ConversationHistory.Add(conversationHistory);
+            await _context.SaveChangesAsync();
+        }
+
+        return response;
+    }
+
+    private string GetResponseInternal(string userInput)
+    {
+        if (string.IsNullOrWhiteSpace(userInput))
+            return "Veuillez entrer une question.";
+
+        // Gestion des salutations
+        var greetings = new[] { "bonjour", "salut", "hello", "hey", "coucou" };
+        if (greetings.Any(g => userInput.ToLower().Contains(g)))
+            return "Bonjour ! Comment puis-je vous aider ?";
+
+        var inputEmbedding = _embeddingService.GetEmbedding(userInput);
+
+        var bestMatch = _knowledgeBase
+            .Select(k => new
+            {
+                k.message.Response,
+                Score = EmbeddingService.CosineSimilarity(inputEmbedding, k.embedding)
+            })
+            .OrderByDescending(x => x.Score)
+            .FirstOrDefault();
+
+        if (bestMatch == null || bestMatch.Score < 0.6f)
+            return "Désolé, je n'ai pas trouvé de réponse pertinente.";
+
+        return bestMatch.Response;
+    }
+}

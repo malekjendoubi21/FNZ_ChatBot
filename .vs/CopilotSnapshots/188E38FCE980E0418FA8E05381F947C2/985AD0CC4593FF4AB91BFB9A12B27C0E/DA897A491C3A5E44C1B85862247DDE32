@@ -1,0 +1,113 @@
+﻿@{
+    ViewData["Title"] = "Accueil";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Bienvenue sur FNZ ChatBot</h1>
+    <p class="lead">Votre assistant virtuel intelligent pour répondre à vos questions.</p>
+    
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Bonjour @User.Identity.Name !</h5>
+                        <p class="card-text">Que souhaitez-vous faire aujourd'hui ?</p>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                            <a class="btn btn-primary btn-lg" asp-controller="Chat" asp-action="Index">
+                                <i class="fas fa-comments"></i> Commencer une conversation
+                            </a>
+                            <a class="btn btn-outline-primary btn-lg" asp-controller="Chat" asp-action="MyConversations">
+                                <i class="fas fa-history"></i> Mes conversations
+                            </a>
+                        </div>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <hr />
+                            <div class="admin-section">
+                                <h6 class="text-muted">Administration</h6>
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                                    <a class="btn btn-outline-secondary" asp-controller="UserManagement" asp-action="Index">
+                                        <i class="fas fa-users"></i> Gestion des utilisateurs
+                                    </a>
+                                    <a class="btn btn-outline-secondary" asp-controller="KnowledgeBase" asp-action="Index">
+                                        <i class="fas fa-database"></i> Base de connaissances
+                                    </a>
+                                    <a class="btn btn-outline-secondary" asp-controller="UserManagement" asp-action="AddUser">
+                                        <i class="fas fa-user-plus"></i> Ajouter un utilisateur
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Connectez-vous pour commencer</h5>
+                        <p class="card-text">Accédez au chatbot avec votre compte utilisateur.</p>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                            <a class="btn btn-primary btn-lg" asp-controller="Account" asp-action="Login">
+                                <i class="fas fa-sign-in-alt"></i> Se connecter
+                            </a>
+                        </div>
+                        <p class="text-muted mt-3">
+                            <small>Pas de compte ? Contactez un administrateur pour en créer un.</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-8">
+                <div class="alert alert-info" role="alert">
+                    <h6><i class="fas fa-info-circle"></i> Compte administrateur par défaut :</h6>
+                    <p class="mb-1"><strong>Email :</strong> admin@fnz.com</p>
+                    <p class="mb-0"><strong>Mot de passe :</strong> Admin123!</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-robot fa-3x text-primary mb-3"></i>
+                                <h5 class="card-title">Intelligence Artificielle</h5>
+                                <p class="card-text">Notre chatbot utilise des technologies avancées d'IA pour comprendre et répondre à vos questions.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-history fa-3x text-success mb-3"></i>
+                                <h5 class="card-title">Conversations continues</h5>
+                                <p class="card-text">Continuez vos conversations là où vous les avez laissées avec un historique complet.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="fas fa-users fa-3x text-warning mb-3"></i>
+                                <h5 class="card-title">Gestion centralisée</h5>
+                                <p class="card-text">Backoffice complet pour la gestion des utilisateurs et de la base de connaissances.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

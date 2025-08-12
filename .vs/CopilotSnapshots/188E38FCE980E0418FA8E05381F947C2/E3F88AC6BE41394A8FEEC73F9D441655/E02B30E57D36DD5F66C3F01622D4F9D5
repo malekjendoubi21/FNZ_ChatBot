@@ -1,0 +1,35 @@
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using FNZ_ChatBot.Models;
+
+namespace FNZ_ChatBot.Data
+{
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
+        {
+        }
+
+        public DbSet<ConversationHistory> ConversationHistory { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            // Configuration des relations
+            builder.Entity<ConversationHistory>()
+                .HasOne(c => c.User)
+                .WithMany(u => u.ConversationHistory)
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Index pour améliorer les performances
+            builder.Entity<ConversationHistory>()
+                .HasIndex(c => c.UserId);
+
+            builder.Entity<ConversationHistory>()
+                .HasIndex(c => c.CreatedDate);
+        }
+    }
+}

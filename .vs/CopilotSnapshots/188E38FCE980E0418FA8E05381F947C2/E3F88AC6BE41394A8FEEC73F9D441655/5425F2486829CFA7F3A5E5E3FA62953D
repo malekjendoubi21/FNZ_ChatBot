@@ -1,0 +1,48 @@
+﻿using Microsoft.AspNetCore.Identity;
+using FNZ_ChatBot.Models;
+
+namespace FNZ_ChatBot.Data
+{
+    public static class SeedData
+    {
+        public static async Task Initialize(IServiceProvider serviceProvider)
+        {
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+            // Créer les rôles
+            string[] roleNames = { "Admin", "User" };
+            foreach (var roleName in roleNames)
+            {
+                var roleExist = await roleManager.RoleExistsAsync(roleName);
+                if (!roleExist)
+                {
+                    await roleManager.CreateAsync(new IdentityRole(roleName));
+                }
+            }
+
+            // Créer un administrateur par défaut
+            var adminEmail = "admin@fnz.com";
+            var adminUser = await userManager.FindByEmailAsync(adminEmail);
+            
+            if (adminUser == null)
+            {
+                adminUser = new ApplicationUser
+                {
+                    UserName = adminEmail,
+                    Email = adminEmail,
+                    FirstName = "Admin",
+                    LastName = "FNZ",
+                    IsAdmin = true,
+                    EmailConfirmed = true
+                };
+
+                var result = await userManager.CreateAsync(adminUser, "Admin123!");
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(adminUser, "Admin");
+                }
+            }
+        }
+    }
+}

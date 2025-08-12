@@ -1,0 +1,91 @@
+@model IEnumerable<Conversation>
+@{
+    ViewData["Title"] = "Mes Conversations";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Mes Conversations</h2>
+                <a asp-controller="Chat" asp-action="Index" class="btn btn-success">
+                    <i class="fas fa-plus"></i> Nouvelle Conversation
+                </a>
+            </div>
+            
+            @if (Model.Any())
+            {
+                <div class="row">
+                    @foreach (var conversation in Model)
+                    {
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <i class="fas fa-comments text-primary"></i>
+                                        @conversation.Title
+                                    </h5>
+                                    <p class="card-text text-muted">
+                                        <small>
+                                            <i class="fas fa-calendar"></i> Créée le @conversation.CreatedDate.ToString("dd/MM/yyyy")
+                                        </small>
+                                    </p>
+                                    <p class="card-text text-muted">
+                                        <small>
+                                            <i class="fas fa-clock"></i> Dernière activité : @conversation.LastActivity.ToString("dd/MM/yyyy HH:mm")
+                                        </small>
+                                    </p>
+                                </div>
+                                <div class="card-footer bg-transparent">
+                                    <div class="d-grid gap-2 d-md-flex">
+                                        <a asp-controller="Chat" asp-action="Index" asp-route-conversationId="@conversation.Id" 
+                                           class="btn btn-primary btn-sm flex-fill">
+                                            <i class="fas fa-play"></i> Continuer
+                                        </a>
+                                        <form asp-action="DeleteConversation" asp-route-id="@conversation.Id" method="post" class="d-inline">
+                                            <button type="submit" class="btn btn-outline-danger btn-sm" 
+                                                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette conversation ?')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="text-center">
+                    <div class="card">
+                        <div class="card-body">
+                            <i class="fas fa-comments fa-5x text-muted mb-4"></i>
+                            <h4 class="text-muted">Aucune conversation</h4>
+                            <p class="text-muted">Vous n'avez pas encore de conversations. Commencez votre première conversation avec le chatbot !</p>
+                            <a asp-controller="Chat" asp-action="Index" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Commencer une nouvelle conversation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}

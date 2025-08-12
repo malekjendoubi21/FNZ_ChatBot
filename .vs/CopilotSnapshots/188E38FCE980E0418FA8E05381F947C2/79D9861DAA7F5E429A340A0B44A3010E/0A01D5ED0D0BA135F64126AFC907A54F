@@ -1,0 +1,37 @@
+﻿using FNZ_ChatBot.Models;
+using FNZ_ChatBot.Services;
+
+public class SemanticChatService : IChatService
+{
+    private readonly List<(Message message, float[] embedding)> _knowledgeBase;
+    private readonly EmbeddingService _embeddingService;
+
+    public SemanticChatService(string modelPath, string jsonFile)
+    {
+        _embeddingService = new EmbeddingService(modelPath);
+        var messages = JsonLoader.LoadMessages(jsonFile);
+
+        _knowledgeBase = messages
+            .Select(m => (m, _embeddingService.GetEmbedding(m.Question)))
+            .ToList();
+    }
+
+    public string GetResponse(string userInput)
+    {
+        var inputEmbedding = _embeddingService.GetEmbedding(userInput);
+
+        var bestMatch = _knowledgeBase
+            .Select(k => new
+            {
+                k.message.Response,
+                Score = EmbeddingService.CosineSimilarity(inputEmbedding, k.embedding)
+            })
+            .OrderByDescending(x => x.Score)
+            .FirstOrDefault();
+
+        if (bestMatch == null || bestMatch.Score < 0.6f)
+            return "Désolé, je n'ai pas trouvé de réponse pertinente.";
+
+        return bestMatch.Response;
+    }
+}

@@ -1,0 +1,92 @@
+﻿using FNZ_ChatBot.Models;
+using FNZ_ChatBot.Data;
+using System.Text.RegularExpressions;
+
+namespace FNZ_ChatBot.Services
+{
+    public class ChatService : IChatService
+    {
+        private readonly SemanticSearch _semanticSearch;
+        private readonly ApplicationDbContext _context;
+
+        public ChatService(string jsonFilePath, ApplicationDbContext context)
+        {
+            // Charger la base de connaissances depuis le JSON
+            var messages = JsonLoader.LoadMessages(jsonFilePath)
+                .Select(m => new QuestionEntry { Question = m.Question, Response = m.Response })
+                .ToList();
+
+            // Initialiser la recherche sémantique
+            _semanticSearch = new SemanticSearch(messages);
+            _context = context;
+        }
+
+        public string GetResponse(string userInput)
+        {
+            return GetResponseInternal(userInput);
+        }
+
+        public async Task<string> GetResponseAsync(string userInput, string? userId = null)
+        {
+            var response = GetResponseInternal(userInput);
+            
+            // Enregistrer dans l'historique si un utilisateur est connecté
+            if (!string.IsNullOrEmpty(userId))
+            {
+                var conversationHistory = new ConversationHistory
+                {
+                    UserId = userId,
+                    Question = userInput,
+                    Response = response,
+                    CreatedDate = DateTime.UtcNow
+                };
+
+                _context.ConversationHistory.Add(conversationHistory);
+                await _context.SaveChangesAsync();
+            }
+
+            return response;
+        }
+
+        private string GetResponseInternal(string userInput)
+        {
+            if (string.IsNullOrWhiteSpace(userInput))
+                return "Veuillez entrer une question.";
+
+            // Gestion des salutations
+            var greetings = new[] { "bonjour", "salut", "hello", "hey", "coucou" };
+            if (greetings.Any(g => userInput.ToLower().Contains(g)))
+                return "Bonjour ! Comment puis-je vous aider ?";
+
+            // Découper en sous-questions
+            var subQuestions = SplitQuestions(userInput);
+
+            var responses = new List<string>();
+            foreach (var question in subQuestions)
+            {
+                var results = _semanticSearch.Search(question, 2, 0.5f); // top 2 avec seuil 0.5
+                if (results.Any())
+                {
+                    responses.Add($"**Question :** {question}\n" +
+                                  string.Join("\n", results.Select(r => "- " + r.Response)));
+                }
+            }
+
+            return responses.Any()
+                ? string.Join("\n\n", responses)
+                : "Désolé, je ne connais pas encore la réponse à cette question.";
+        }
+
+        // Découpe une entrée utilisateur en sous-questions
+        private List<string> SplitQuestions(string input)
+        {
+            var rawParts = Regex.Split(input, @"\?| et | puis |&|\n|-", RegexOptions.IgnoreCase)
+                                .Select(q => q.Trim())
+                                .Where(q => !string.IsNullOrWhiteSpace(q))
+                                .ToList();
+
+            var filteredParts = rawParts.Where(q => q.Split(' ').Length >= 4).ToList();
+            return filteredParts.Any() ? filteredParts : new List<string> { input };
+        }
+    }
+}
