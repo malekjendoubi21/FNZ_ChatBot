@@ -1,0 +1,83 @@
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using FNZ_ChatBot.Models;
+
+namespace FNZ_ChatBot.Data
+{
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
+        {
+        }
+
+        public DbSet<ConversationHistory> ConversationHistory { get; set; }
+        public DbSet<Conversation> Conversations { get; set; }
+        public DbSet<KnowledgeBase> KnowledgeBase { get; set; }
+        public DbSet<PasswordResetCode> PasswordResetCodes { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            // Configuration des relations ConversationHistory
+            builder.Entity<ConversationHistory>()
+                .HasOne(c => c.User)
+                .WithMany(u => u.ConversationHistory)
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<ConversationHistory>()
+                .HasOne(c => c.Conversation)
+                .WithMany(conv => conv.Messages)
+                .HasForeignKey(c => c.ConversationId)
+                .OnDelete(DeleteBehavior.NoAction); // Changé de SetNull à NoAction
+
+            // Configuration des relations Conversation
+            builder.Entity<Conversation>()
+                .HasOne(c => c.User)
+                .WithMany(u => u.Conversations)
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Configuration des relations PasswordResetCode
+            builder.Entity<PasswordResetCode>()
+                .HasOne(p => p.User)
+                .WithMany()
+                .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Index pour améliorer les performances
+            builder.Entity<ConversationHistory>()
+                .HasIndex(c => c.UserId);
+
+            builder.Entity<ConversationHistory>()
+                .HasIndex(c => c.CreatedDate);
+
+            builder.Entity<ConversationHistory>()
+                .HasIndex(c => c.ConversationId);
+
+            builder.Entity<Conversation>()
+                .HasIndex(c => c.UserId);
+
+            builder.Entity<Conversation>()
+                .HasIndex(c => c.LastActivity);
+
+            builder.Entity<KnowledgeBase>()
+                .HasIndex(k => k.Question);
+
+            builder.Entity<KnowledgeBase>()
+                .HasIndex(k => k.IsActive);
+
+            // Index pour PasswordResetCode
+            builder.Entity<PasswordResetCode>()
+                .HasIndex(p => p.UserId);
+
+            builder.Entity<PasswordResetCode>()
+                .HasIndex(p => p.Code);
+
+            builder.Entity<PasswordResetCode>()
+                .HasIndex(p => p.ExpiresAt);
+        }
+    }
+}

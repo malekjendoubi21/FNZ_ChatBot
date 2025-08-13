@@ -47,9 +47,15 @@ builder.Services.ConfigureApplicationCookie(options =>
 // Configuration du service de chat (utilise maintenant la base de données)
 builder.Services.AddScoped<IChatService, ChatService>();
 
-// Configuration des nouveaux services
+// Configuration des services existants
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IPasswordGeneratorService, PasswordGeneratorService>();
+
+// Configuration des nouveaux services pour le mot de passe oublié
+builder.Services.AddScoped<IVerificationCodeService, VerificationCodeService>();
+
+// Ajouter un service de nettoyage en arrière-plan
+builder.Services.AddHostedService<CleanupBackgroundService>();
 
 var app = builder.Build();
 

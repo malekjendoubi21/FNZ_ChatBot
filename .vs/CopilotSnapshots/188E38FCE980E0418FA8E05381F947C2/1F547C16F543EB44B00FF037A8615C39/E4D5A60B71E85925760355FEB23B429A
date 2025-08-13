@@ -1,0 +1,237 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Connexion";
+}
+
+<div class="container-fluid py-5">
+    <div class="row justify-content-center min-vh-75 align-items-center">
+        <div class="col-lg-5 col-md-7">
+            <!-- Carte de connexion moderne -->
+            <div class="card border-0 shadow-lg animate__animated animate__fadeInUp">
+                <div class="card-header bg-gradient text-white p-4 text-center" style="background: var(--primary-gradient);">
+                    <div class="mb-3">
+                        <i class="fas fa-robot fa-3x text-white"></i>
+                    </div>
+                    <h3 class="mb-1 fw-bold">FNZ ChatBot</h3>
+                    <p class="mb-0 opacity-75">Connexion à votre espace</p>
+                </div>
+                
+                <div class="card-body p-5">
+                    <form asp-action="Login" method="post" class="needs-validation" novalidate>
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger border-0 mb-4"></div>
+                        <input asp-for="ReturnUrl" type="hidden" />
+                        
+                        <!-- Champ Email -->
+                        <div class="form-floating mb-3 animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+                            <input asp-for="Email" class="form-control" placeholder="Email" type="email" required />
+                            <label asp-for="Email" class="form-label">
+                                <i class="fas fa-envelope me-2"></i>Adresse email
+                            </label>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        
+                        <!-- Champ Mot de passe -->
+                        <div class="form-floating mb-3 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                            <input asp-for="Password" class="form-control" placeholder="Mot de passe" type="password" required />
+                            <label asp-for="Password" class="form-label">
+                                <i class="fas fa-lock me-2"></i>Mot de passe
+                            </label>
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        
+                        <!-- Case à cocher "Se souvenir de moi" -->
+                        <div class="form-check mb-4 animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+                            <input asp-for="RememberMe" class="form-check-input" id="rememberMe" />
+                            <label asp-for="RememberMe" class="form-check-label" for="rememberMe">
+                                <i class="fas fa-history me-2"></i>Se souvenir de moi
+                            </label>
+                        </div>
+                        
+                        <!-- Bouton de connexion -->
+                        <div class="d-grid mb-4 animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-sign-in-alt me-2"></i>Se connecter
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <!-- Séparateur -->
+                    <hr class="my-4">
+                    
+                    <!-- Message pour nouveau compte -->
+                    <div class="text-center animate__animated animate__fadeInUp" style="animation-delay: 0.5s;">
+                        <div class="alert alert-info border-0 bg-light">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <i class="fas fa-info-circle fa-lg me-3 text-primary"></i>
+                                <div>
+                                    <h6 class="mb-1">Vous n'avez pas de compte ?</h6>
+                                    <p class="mb-0 text-muted">
+                                        Merci de contacter <a href="mailto:admin@fnz.tn" class="text-primary fw-semibold">admin@fnz.tn</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Informations de démonstration -->
+                    <div class="mt-4 animate__animated animate__fadeInUp" style="animation-delay: 0.6s;">
+                        <div class="card border-0 bg-light">
+                            <div class="card-body p-3">
+                                <h6 class="text-muted mb-3">
+                                    <i class="fas fa-key me-2"></i>Compte de démonstration
+                                </h6>
+                                <div class="row text-sm">
+                                    <div class="col-sm-6">
+                                        <strong>Email :</strong> admin@fnz.com
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <strong>Mot de passe :</strong> Admin123!
+                                    </div>
+                                </div>
+                                <small class="text-muted mt-2 d-block">
+                                    <i class="fas fa-shield-alt me-1"></i>
+                                    Compte administrateur pour tests et démonstration
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer de la page de connexion -->
+            <div class="text-center mt-4 animate__animated animate__fadeInUp" style="animation-delay: 0.7s;">
+                <p class="text-muted mb-0">
+                    <i class="fas fa-shield-alt me-2"></i>
+                    Connexion sécurisée - Vos données sont protégées
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Styles personnalisés pour la page de connexion -->
+<style>
+.min-vh-75 {
+    min-height: 75vh;
+}
+
+.form-floating > .form-control {
+    height: calc(3.5rem + 2px);
+    border: 2px solid #e2e8f0;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.form-floating > .form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-floating > label {
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label {
+    color: #667eea;
+}
+
+.form-check-input:checked {
+    background-color: #667eea;
+    border-color: #667eea;
+}
+
+.form-check-label {
+    font-weight: 500;
+    color: #495057;
+}
+
+.card {
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.card-header {
+    border-bottom: none;
+}
+
+/* Animation d'entrée pour la page */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-slide-in {
+    animation: slideInUp 0.6s ease-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .card-body {
+        padding: 2rem 1.5rem;
+    }
+    
+    .card-header {
+        padding: 2rem 1.5rem;
+    }
+}
+</style>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Validation du formulaire
+            const form = document.querySelector('.needs-validation');
+            if (form) {
+                form.addEventListener('submit', function(event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                });
+            }
+            
+            // Animation des champs au focus
+            const formControls = document.querySelectorAll('.form-control');
+            formControls.forEach(control => {
+                control.addEventListener('focus', function() {
+                    this.parentElement.classList.add('focused');
+                });
+                
+                control.addEventListener('blur', function() {
+                    if (!this.value) {
+                        this.parentElement.classList.remove('focused');
+                    }
+                });
+            });
+            
+            // Effet de typing sur le titre (optionnel)
+            const title = document.querySelector('.card-header h3');
+            if (title) {
+                const text = title.textContent;
+                title.textContent = '';
+                let i = 0;
+                
+                const typeWriter = () => {
+                    if (i < text.length) {
+                        title.textContent += text.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 100);
+                    }
+                };
+                
+                setTimeout(typeWriter, 500);
+            }
+        });
+    </script>
+}

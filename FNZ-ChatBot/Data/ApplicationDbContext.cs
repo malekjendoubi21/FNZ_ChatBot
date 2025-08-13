@@ -14,6 +14,7 @@ namespace FNZ_ChatBot.Data
         public DbSet<ConversationHistory> ConversationHistory { get; set; }
         public DbSet<Conversation> Conversations { get; set; }
         public DbSet<KnowledgeBase> KnowledgeBase { get; set; }
+        public DbSet<PasswordResetCode> PasswordResetCodes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -39,6 +40,13 @@ namespace FNZ_ChatBot.Data
                 .HasForeignKey(c => c.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            // Configuration des relations PasswordResetCode
+            builder.Entity<PasswordResetCode>()
+                .HasOne(p => p.User)
+                .WithMany()
+                .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             // Index pour améliorer les performances
             builder.Entity<ConversationHistory>()
                 .HasIndex(c => c.UserId);
@@ -60,6 +68,16 @@ namespace FNZ_ChatBot.Data
 
             builder.Entity<KnowledgeBase>()
                 .HasIndex(k => k.IsActive);
+
+            // Index pour PasswordResetCode
+            builder.Entity<PasswordResetCode>()
+                .HasIndex(p => p.UserId);
+
+            builder.Entity<PasswordResetCode>()
+                .HasIndex(p => p.Code);
+
+            builder.Entity<PasswordResetCode>()
+                .HasIndex(p => p.ExpiresAt);
         }
     }
 }

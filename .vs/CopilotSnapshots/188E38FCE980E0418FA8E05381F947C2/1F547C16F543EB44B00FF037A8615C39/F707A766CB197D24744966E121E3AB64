@@ -1,0 +1,139 @@
+﻿@model ChangePasswordViewModel
+@{
+    ViewData["Title"] = Model.IsFirstLogin ? "Changement de mot de passe obligatoire" : "Changer le mot de passe";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                @if (Model.IsFirstLogin)
+                {
+                    <h4 class="text-warning">
+                        <i class="fas fa-exclamation-triangle"></i> Changement de mot de passe obligatoire
+                    </h4>
+                }
+                else
+                {
+                    <h4><i class="fas fa-key"></i> Changer le mot de passe</h4>
+                }
+            </div>
+            <div class="card-body">
+                @if (Model.IsFirstLogin)
+                {
+                    <div class="alert alert-warning" role="alert">
+                        <h6><i class="fas fa-shield-alt"></i> Première connexion détectée</h6>
+                        <p class="mb-0">
+                            Pour des raisons de sécurité, vous devez changer votre mot de passe temporaire avant de pouvoir accéder au système.
+                        </p>
+                    </div>
+                }
+                
+                <form asp-action="ChangePassword" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    <input type="hidden" asp-for="IsFirstLogin" />
+                    
+                    <div class="form-group mb-3">
+                        <label asp-for="CurrentPassword" class="form-label"></label>
+                        <input asp-for="CurrentPassword" class="form-control" />
+                        <span asp-validation-for="CurrentPassword" class="text-danger"></span>
+                        @if (Model.IsFirstLogin)
+                        {
+                            <div class="form-text">Utilisez le mot de passe temporaire reçu par email</div>
+                        }
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label asp-for="NewPassword" class="form-label"></label>
+                        <input asp-for="NewPassword" class="form-control" />
+                        <span asp-validation-for="NewPassword" class="text-danger"></span>
+                        <div class="form-text">Minimum 6 caractères, doit contenir au moins un chiffre</div>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label asp-for="ConfirmPassword" class="form-label"></label>
+                        <input asp-for="ConfirmPassword" class="form-control" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="card mb-3 bg-info-subtle">
+                        <div class="card-body">
+                            <h6 class="card-title text-info-emphasis">
+                                <i class="fas fa-lightbulb"></i> Conseils pour un mot de passe sécurisé
+                            </h6>
+                            <ul class="mb-0 small text-info-emphasis">
+                                <li>Utilisez au moins 8 caractères</li>
+                                <li>Mélangez majuscules, minuscules, chiffres et symboles</li>
+                                <li>Évitez les mots du dictionnaire ou les informations personnelles</li>
+                                <li>N'utilisez pas le même mot de passe pour plusieurs comptes</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        @if (Model.IsFirstLogin)
+                        {
+                            <button type="submit" class="btn btn-warning btn-lg">
+                                <i class="fas fa-check"></i> Confirmer et accéder au système
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Enregistrer le nouveau mot de passe
+                            </button>
+                            <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Annuler
+                            </a>
+                        }
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    
+    <script>
+        // Afficher la force du mot de passe en temps réel
+        document.getElementById('NewPassword').addEventListener('input', function() {
+            const password = this.value;
+            const strength = calculatePasswordStrength(password);
+            updatePasswordStrengthIndicator(strength);
+        });
+        
+        function calculatePasswordStrength(password) {
+            let score = 0;
+            if (password.length >= 8) score++;
+            if (/[a-z]/.test(password)) score++;
+            if (/[A-Z]/.test(password)) score++;
+            if (/\d/.test(password)) score++;
+            if (/[^a-zA-Z\d]/.test(password)) score++;
+            return score;
+        }
+        
+        function updatePasswordStrengthIndicator(strength) {
+            const indicator = document.getElementById('password-strength');
+            if (!indicator) return;
+            
+            const classes = ['text-danger', 'text-warning', 'text-info', 'text-success'];
+            const texts = ['Très faible', 'Faible', 'Moyen', 'Fort', 'Très fort'];
+            
+            indicator.className = classes[Math.min(strength - 1, 3)] || 'text-muted';
+            indicator.textContent = texts[strength] || '';
+        }
+        
+        // Ajouter l'indicateur de force
+        document.addEventListener('DOMContentLoaded', function() {
+            const passwordField = document.getElementById('NewPassword');
+            if (passwordField) {
+                const indicator = document.createElement('div');
+                indicator.id = 'password-strength';
+                indicator.className = 'form-text';
+                passwordField.parentNode.appendChild(indicator);
+            }
+        });
+    </script>
+}

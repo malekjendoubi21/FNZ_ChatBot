@@ -1,0 +1,250 @@
+﻿@model ChangePasswordViewModel
+@{
+    ViewData["Title"] = Model.IsFirstLogin ? "Changement de mot de passe obligatoire" : "Changer le mot de passe";
+}
+
+<div class="change-password-page">
+    <div class="container-fluid py-5">
+        <div class="row justify-content-center min-vh-75 align-items-center">
+            <div class="col-lg-6 col-md-8">
+                <!-- Carte de changement de mot de passe -->
+                <div class="card border-0 shadow-lg animate__animated animate__fadeInUp">
+                    <div class="card-header bg-gradient text-white p-4 text-center" style="background: @(Model.IsFirstLogin ? "linear-gradient(135deg, #f59e0b 0%, #f97316 100%)" : "var(--primary-gradient)");">
+                        <div class="mb-3">
+                            <i class="fas @(Model.IsFirstLogin ? "fa-exclamation-triangle" : "fa-key") fa-3x text-white"></i>
+                        </div>
+                        @if (Model.IsFirstLogin)
+                        {
+                            <h3 class="mb-1 fw-bold">Changement Obligatoire</h3>
+                            <p class="mb-0 opacity-75">Première connexion détectée</p>
+                        }
+                        else
+                        {
+                            <h3 class="mb-1 fw-bold">Changer le Mot de Passe</h3>
+                            <p class="mb-0 opacity-75">Sécurisez votre compte</p>
+                        }
+                    </div>
+                    
+                    <div class="card-body p-5">
+                        @if (Model.IsFirstLogin)
+                        {
+                            <div class="alert alert-warning border-0 mb-4 animate__animated animate__fadeInUp" style="animation-delay: 0.1s;">
+                                <div class="d-flex align-items-start">
+                                    <i class="fas fa-shield-alt fa-2x me-3 text-warning"></i>
+                                    <div>
+                                        <h6 class="alert-heading">
+                                            <i class="fas fa-info-circle me-2"></i>Première connexion détectée
+                                        </h6>
+                                        <p class="mb-0">
+                                            Pour des raisons de sécurité, vous devez changer votre mot de passe temporaire avant de pouvoir accéder au système.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        
+                        <form asp-action="ChangePassword" method="post" class="needs-validation" novalidate>
+                            <div asp-validation-summary="ModelOnly" class="alert alert-danger border-0 mb-4"></div>
+                            <input type="hidden" asp-for="IsFirstLogin" />
+                            
+                            <!-- Mot de passe actuel -->
+                            <div class="form-floating mb-3 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                                <input asp-for="CurrentPassword" class="form-control" placeholder="Mot de passe actuel" type="password" required />
+                                <label asp-for="CurrentPassword" class="form-label">
+                                    <i class="fas fa-lock me-2"></i>Mot de passe actuel
+                                </label>
+                                <span asp-validation-for="CurrentPassword" class="text-danger"></span>
+                                @if (Model.IsFirstLogin)
+                                {
+                                    <div class="form-text">
+                                        <i class="fas fa-envelope me-1"></i>
+                                        Utilisez le mot de passe temporaire reçu par email
+                                    </div>
+                                }
+                            </div>
+                            
+                            <!-- Nouveau mot de passe -->
+                            <div class="form-floating mb-3 animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+                                <input asp-for="NewPassword" class="form-control" placeholder="Nouveau mot de passe" type="password" required />
+                                <label asp-for="NewPassword" class="form-label">
+                                    <i class="fas fa-key me-2"></i>Nouveau mot de passe
+                                </label>
+                                <span asp-validation-for="NewPassword" class="text-danger"></span>
+                                <div class="form-text">
+                                    <i class="fas fa-info-circle me-1"></i>
+                                    Minimum 6 caractères, doit contenir au moins un chiffre
+                                </div>
+                                <div id="password-strength-indicator" class="mt-2"></div>
+                            </div>
+                            
+                            <!-- Confirmation mot de passe -->
+                            <div class="form-floating mb-4 animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
+                                <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirmer le mot de passe" type="password" required />
+                                <label asp-for="ConfirmPassword" class="form-label">
+                                    <i class="fas fa-check-double me-2"></i>Confirmer le mot de passe
+                                </label>
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </div>
+                            
+                            <!-- Conseils de sécurité -->
+                            <div class="card mb-4 animate__animated animate__fadeInUp" style="animation-delay: 0.5s;">
+                                <div class="card-body p-4" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(99, 102, 241, 0.1));">
+                                    <h6 class="card-title text-primary">
+                                        <i class="fas fa-lightbulb me-2"></i>Conseils pour un mot de passe sécurisé
+                                    </h6>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="d-flex align-items-center text-success">
+                                                <i class="fas fa-check-circle me-2"></i>
+                                                <span>Au moins 8 caractères</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="d-flex align-items-center text-success">
+                                                <i class="fas fa-check-circle me-2"></i>
+                                                <span>Majuscules et minuscules</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="d-flex align-items-center text-success">
+                                                <i class="fas fa-check-circle me-2"></i>
+                                                <span>Chiffres et symboles</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="d-flex align-items-center text-success">
+                                                <i class="fas fa-check-circle me-2"></i>
+                                                <span>Éviter les mots du dictionnaire</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Boutons d'action -->
+                            <div class="d-grid gap-2 animate__animated animate__fadeInUp" style="animation-delay: 0.6s;">
+                                @if (Model.IsFirstLogin)
+                                {
+                                    <button type="submit" class="btn btn-warning btn-lg">
+                                        <i class="fas fa-shield-alt me-2"></i>Confirmer et accéder au système
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary btn-lg mb-2">
+                                        <i class="fas fa-save me-2"></i>Enregistrer le nouveau mot de passe
+                                    </button>
+                                    <a href="@Url.Action("Index", "Home")" class="btn btn-outline-secondary">
+                                        <i class="fas fa-times me-2"></i>Annuler
+                                    </a>
+                                }
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Informations de sécurité -->
+                <div class="text-center mt-4 animate__animated animate__fadeInUp" style="animation-delay: 0.7s;">
+                    <p class="text-muted mb-0">
+                        <i class="fas fa-lock me-2"></i>
+                        Vos données sont chiffrées et sécurisées
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Validation du formulaire
+            const form = document.querySelector('.needs-validation');
+            if (form) {
+                form.addEventListener('submit', function(event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                });
+            }
+            
+            // Indicateur de force du mot de passe
+            const newPasswordField = document.querySelector('#NewPassword');
+            const confirmPasswordField = document.querySelector('#ConfirmPassword');
+            const strengthIndicator = document.getElementById('password-strength-indicator');
+            
+            if (newPasswordField && strengthIndicator) {
+                newPasswordField.addEventListener('input', function() {
+                    const password = this.value;
+                    const strength = calculatePasswordStrength(password);
+                    updatePasswordStrengthIndicator(strength, password.length);
+                });
+            }
+            
+            // Vérification en temps réel de la confirmation
+            if (confirmPasswordField && newPasswordField) {
+                confirmPasswordField.addEventListener('input', function() {
+                    const password = newPasswordField.value;
+                    const confirm = this.value;
+                    
+                    this.classList.remove('is-valid', 'is-invalid');
+                    if (confirm.length > 0) {
+                        if (password === confirm) {
+                            this.classList.add('is-valid');
+                        } else {
+                            this.classList.add('is-invalid');
+                        }
+                    }
+                });
+            }
+            
+            function calculatePasswordStrength(password) {
+                let score = 0;
+                const checks = [
+                    password.length >= 8,
+                    /[a-z]/.test(password),
+                    /[A-Z]/.test(password),
+                    /\d/.test(password),
+                    /[^a-zA-Z\d]/.test(password)
+                ];
+                
+                checks.forEach(check => {
+                    if (check) score++;
+                });
+                
+                return score;
+            }
+            
+            function updatePasswordStrengthIndicator(strength, length) {
+                if (!strengthIndicator) return;
+                
+                const levels = [
+                    { class: 'text-danger', text: 'Très faible', width: '20%' },
+                    { class: 'text-warning', text: 'Faible', width: '40%' },
+                    { class: 'text-info', text: 'Moyen', width: '60%' },
+                    { class: 'text-primary', text: 'Fort', width: '80%' },
+                    { class: 'text-success', text: 'Très fort', width: '100%' }
+                ];
+                
+                const level = levels[Math.min(strength, 4)] || levels[0];
+                
+                strengthIndicator.innerHTML = `
+                    <div class="password-strength-bar mb-1">
+                        <div class="progress" style="height: 6px;">
+                            <div class="progress-bar ${level.class.replace('text-', 'bg-')}" 
+                                 style="width: ${length > 0 ? level.width : '0%'}; transition: width 0.3s ease;">
+                            </div>
+                        </div>
+                    </div>
+                    <small class="${level.class} fw-semibold">
+                        ${length > 0 ? level.text : ''}
+                    </small>
+                `;
+            }
+        });
+    </script>
+}

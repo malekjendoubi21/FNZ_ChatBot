@@ -1,0 +1,99 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Ajouter un utilisateur";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Ajouter un nouvel utilisateur</h2>
+                <a href="@Url.Action("Index")" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Retour à la liste
+                </a>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-user-plus"></i> Informations du nouvel utilisateur</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="alert alert-info mb-4" role="alert">
+                                <h6><i class="fas fa-info-circle"></i> Génération automatique du mot de passe</h6>
+                                <p class="mb-0">Un mot de passe sécurisé sera généré automatiquement et envoyé par email à l'utilisateur. Il devra le changer lors de sa première connexion.</p>
+                            </div>
+                            
+                            <form asp-action="AddUser" method="post">
+                                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                                
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label asp-for="FirstName" class="form-label"></label>
+                                        <input asp-for="FirstName" class="form-control" placeholder="Prénom de l'utilisateur" />
+                                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label asp-for="LastName" class="form-label"></label>
+                                        <input asp-for="LastName" class="form-control" placeholder="Nom de l'utilisateur" />
+                                        <span asp-validation-for="LastName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group mb-3">
+                                    <label asp-for="Email" class="form-label"></label>
+                                    <input asp-for="Email" class="form-control" placeholder="exemple@fnz.com" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                    <div class="form-text">L'email servira comme nom d'utilisateur pour la connexion et recevra le mot de passe temporaire</div>
+                                </div>
+                                
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Permissions utilisateur</h6>
+                                        <div class="form-check">
+                                            <input asp-for="IsAdmin" class="form-check-input" />
+                                            <label asp-for="IsAdmin" class="form-check-label">
+                                                <strong>Administrateur</strong>
+                                            </label>
+                                            <div class="form-text">
+                                                Les administrateurs peuvent gérer les utilisateurs, la base de connaissances et voir tous les historiques de conversations.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="card mb-3 bg-warning-subtle">
+                                    <div class="card-body">
+                                        <h6 class="card-title text-warning-emphasis">
+                                            <i class="fas fa-key"></i> Sécurité du mot de passe
+                                        </h6>
+                                        <ul class="mb-0 text-warning-emphasis">
+                                            <li>Un mot de passe temporaire sera généré automatiquement (12 caractères sécurisés)</li>
+                                            <li>L'utilisateur recevra ses identifiants par email</li>
+                                            <li>Il devra obligatoirement changer son mot de passe lors de sa première connexion</li>
+                                            <li>L'ancien mot de passe temporaire sera alors invalidé</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <a href="@Url.Action("Index")" class="btn btn-secondary">
+                                        <i class="fas fa-times"></i> Annuler
+                                    </a>
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="fas fa-user-plus"></i> Créer l'utilisateur et envoyer l'email
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

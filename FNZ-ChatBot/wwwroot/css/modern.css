@@ -1,0 +1,1368 @@
+/* ===== MODERN DESIGN SYSTEM ===== */
+
+/* Variables CSS pour la cohérence */
+:root {
+  /* Couleurs primaires */
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --warning-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  --danger-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+  
+  /* Couleurs neutres modernes */
+  --bg-primary: #f8fafc;
+  --bg-secondary: #e2e8f0;
+  --text-primary: #1a202c;
+  --text-secondary: #4a5568;
+  --text-muted: #718096;
+  
+  /* Couleurs sombres pour le mode sombre */
+  --dark-bg: #1a202c;
+  --dark-surface: #2d3748;
+  --dark-text: #f7fafc;
+  
+  /* Couleurs fixes pour une meilleure visibilité */
+  --white: #ffffff;
+  --black: #000000;
+  --gray-100: #f7fafc;
+  --gray-200: #edf2f7;
+  --gray-300: #e2e8f0;
+  --gray-400: #cbd5e0;
+  --gray-500: #a0aec0;
+  --gray-600: #718096;
+  --gray-700: #4a5568;
+  --gray-800: #2d3748;
+  --gray-900: #1a202c;
+  
+  /* Spacing system */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  
+  /* Border radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* ===== RESET ET BASE ===== */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg-primary);
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* ===== NAVIGATION MODERNE ===== */
+
+.navbar {
+  background: rgba(255, 255, 255, 0.98) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.5rem;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-link {
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  color: var(--gray-700) !important;
+}
+
+.nav-link:hover {
+  color: #667eea !important;
+  transform: translateY(-1px);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 50%;
+  background: var(--primary-gradient);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ===== CARTES MODERNES ===== */
+
+.card {
+  border: none;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+  background: var(--white);
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-xl);
+}
+
+.card-header {
+  background: transparent;
+  border-bottom: 1px solid var(--gray-200);
+  padding: var(--spacing-lg);
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+.card-body {
+  padding: var(--spacing-lg);
+  background: var(--white);
+  color: var(--text-primary);
+}
+
+/* Cartes avec gradient */
+.card-gradient {
+  background: var(--primary-gradient);
+  color: var(--white);
+}
+
+.card-gradient .card-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--white);
+}
+
+.card-gradient .card-body {
+  background: transparent;
+  color: var(--white);
+}
+
+/* ===== BOUTONS MODERNES ===== */
+
+.btn {
+  border-radius: var(--radius-lg);
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px; /* Accessibilité tactile */
+}
+
+.btn:focus {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn-primary {
+  background: var(--primary-gradient);
+  border: 2px solid transparent;
+  color: var(--white) !important;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  color: var(--white) !important;
+}
+
+.btn-success {
+  background: var(--success-gradient);
+  border: 2px solid transparent;
+  color: var(--white) !important;
+}
+
+.btn-success:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  color: var(--white) !important;
+}
+
+.btn-warning {
+  background: var(--warning-gradient);
+  border: 2px solid transparent;
+  color: var(--gray-800) !important;
+}
+
+.btn-warning:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  color: var(--gray-800) !important;
+}
+
+.btn-danger {
+  background: var(--danger-gradient);
+  border: 2px solid transparent;
+  color: var(--white) !important;
+}
+
+.btn-danger:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  color: var(--white) !important;
+}
+
+.btn-outline-primary {
+  border: 2px solid #667eea;
+  color: #667eea !important;
+  background: var(--white);
+}
+
+.btn-outline-primary:hover {
+  background: var(--primary-gradient);
+  border-color: transparent;
+  color: var(--white) !important;
+  transform: translateY(-2px);
+}
+
+.btn-outline-secondary {
+  border: 2px solid var(--gray-400);
+  color: var(--gray-700) !important;
+  background: var(--white);
+}
+
+.btn-outline-secondary:hover {
+  background: var(--gray-700);
+  border-color: var(--gray-700);
+  color: var(--white) !important;
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: var(--gray-600);
+  border: 2px solid var(--gray-600);
+  color: var(--white) !important;
+}
+
+.btn-secondary:hover {
+  background: var(--gray-700);
+  border-color: var(--gray-700);
+  color: var(--white) !important;
+  transform: translateY(-2px);
+}
+
+/* ===== FORMULAIRES MODERNES ===== */
+
+.form-control {
+  border: 2px solid var(--gray-300);
+  border-radius: var(--radius-lg);
+  padding: 0.75rem 1rem;
+  transition: all 0.3s ease;
+  background: var(--white);
+  color: var(--text-primary);
+}
+
+.form-control:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  background: var(--white);
+  color: var(--text-primary);
+}
+
+.form-label {
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.form-floating > .form-control {
+  color: var(--text-primary);
+  background: var(--white);
+}
+
+.form-floating > label {
+  color: var(--text-secondary);
+}
+
+/* ===== ALERTES MODERNES ===== */
+
+.alert {
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  border-left: 4px solid;
+  color: var(--text-primary);
+}
+
+.alert-success {
+  background: rgba(34, 197, 94, 0.1);
+  border-left-color: #22c55e;
+  color: #15803d;
+}
+
+.alert-warning {
+  background: rgba(251, 191, 36, 0.1);
+  border-left-color: #fbbf24;
+  color: #92400e;
+}
+
+.alert-danger {
+  background: rgba(239, 68, 68, 0.1);
+  border-left-color: #ef4444;
+  color: #991b1b;
+}
+
+.alert-info {
+  background: rgba(59, 130, 246, 0.1);
+  border-left-color: #3b82f6;
+  color: #1e40af;
+}
+
+/* ===== BADGES MODERNES ===== */
+
+.badge {
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-lg);
+  font-size: 0.875rem;
+  color: var(--white);
+}
+
+.bg-success {
+  background: var(--success-gradient) !important;
+  color: var(--white) !important;
+}
+
+.bg-primary {
+  background: var(--primary-gradient) !important;
+  color: var(--white) !important;
+}
+
+.bg-warning {
+  background: var(--warning-gradient) !important;
+  color: var(--gray-800) !important;
+}
+
+.bg-danger {
+  background: var(--danger-gradient) !important;
+  color: var(--white) !important;
+}
+
+/* ===== TABLES MODERNES ===== */
+
+.table {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  color: var(--text-primary);
+}
+
+.table thead th {
+  background: var(--gray-100);
+  border: none;
+  font-weight: 600;
+  color: var(--text-primary);
+  padding: var(--spacing-lg);
+}
+
+.table tbody tr {
+  transition: all 0.3s ease;
+  background: var(--white);
+}
+
+.table tbody tr:hover {
+  background-color: rgba(102, 126, 234, 0.05);
+  transform: scale(1.01);
+}
+
+.table tbody td {
+  padding: var(--spacing-lg);
+  border: none;
+  border-bottom: 1px solid var(--gray-200);
+  color: var(--text-primary);
+}
+
+/* ===== TEXTE ET COULEURS ===== */
+
+.text-primary {
+  color: var(--text-primary) !important;
+}
+
+.text-secondary {
+  color: var(--text-secondary) !important;
+}
+
+.text-muted {
+  color: var(--text-muted) !important;
+}
+
+.text-white {
+  color: var(--white) !important;
+}
+
+.text-dark {
+  color: var(--gray-900) !important;
+}
+
+/* Classes pour assurer la visibilité */
+.text-contrast {
+  color: var(--text-primary) !important;
+}
+
+.bg-contrast {
+  background-color: var(--white) !important;
+  color: var(--text-primary) !important;
+}
+
+/* ===== ANIMATIONS ===== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Classes d'animation */
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-fade-in-left {
+  animation: fadeInLeft 0.6s ease-out;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.6s ease-out;
+}
+
+/* ===== UTILITAIRES MODERNES ===== */
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--text-primary);
+}
+
+.gradient-text {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hover-lift {
+  transition: transform 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+}
+
+/* ===== GRILLE MODERNE ===== */
+
+.modern-grid {
+  display: grid;
+  gap: var(--spacing-lg);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* ===== SIDEBAR CHAT MODERNE ===== */
+
+.chat-sidebar {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  border-right: 1px solid var(--gray-200);
+  color: var(--text-primary);
+}
+
+.conversation-item {
+  transition: all 0.3s ease;
+  border-radius: var(--radius-lg);
+  margin: var(--spacing-sm) 0;
+  color: var(--text-primary);
+}
+
+.conversation-item:hover {
+  background: var(--primary-gradient);
+  color: var(--white);
+  transform: translateX(5px);
+}
+
+/* ===== FOOTER MODERNE ===== */
+
+.footer {
+  background: var(--gray-900);
+  color: var(--white);
+  border-top: none;
+  padding: var(--spacing-xl) 0;
+}
+
+/* ===== STYLES SPÉCIFIQUES POUR LES PAGES ===== */
+
+/* Animations pour la page d'accueil */
+@keyframes pulse-ring {
+    0% {
+        transform: scale(0.8);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.2);
+        opacity: 0;
+    }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Hero Section pour la page d'accueil */
+.hero-section {
+    background: var(--primary-gradient);
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><polygon points="1000,100 1000,0 0,100"/></svg>');
+    background-size: cover;
+}
+
+.hero-section * {
+    color: var(--white) !important;
+}
+
+.hero-section .text-muted {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.min-vh-50 {
+    min-height: 50vh;
+}
+
+.robot-container {
+    position: relative;
+    display: inline-block;
+}
+
+.pulse-rings {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.pulse-ring {
+    position: absolute;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    animation: pulse-ring 2s infinite;
+}
+
+.pulse-ring:nth-child(1) {
+    width: 120px;
+    height: 120px;
+    margin: -60px 0 0 -60px;
+    animation-delay: 0s;
+}
+
+.pulse-ring:nth-child(2) {
+    width: 160px;
+    height: 160px;
+    margin: -80px 0 0 -80px;
+    animation-delay: 0.5s;
+}
+
+.pulse-ring:nth-child(3) {
+    width: 200px;
+    height: 200px;
+    margin: -100px 0 0 -100px;
+    animation-delay: 1s;
+}
+
+.hero-image i {
+    animation: float 3s ease-in-out infinite;
+}
+
+.icon-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(102, 126, 234, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.user-avatar-large {
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+/* Styles pour la gestion des utilisateurs */
+.modern-header {
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-row {
+    transition: all 0.3s ease;
+    color: var(--text-primary);
+}
+
+.user-row:hover {
+    background-color: rgba(102, 126, 234, 0.05);
+    transform: translateX(5px);
+}
+
+.user-avatar {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* Styles pour le formulaire d'ajout d'utilisateur */
+.form-section {
+    position: relative;
+    padding-left: 1rem;
+    border-left: 3px solid #667eea;
+}
+
+.section-title {
+    font-weight: 600;
+    position: relative;
+    color: var(--text-primary);
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: var(--primary-gradient);
+}
+
+.alert-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+}
+
+.step-icon {
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.step-icon:hover {
+    transform: scale(1.1);
+}
+
+.form-actions {
+    padding-top: 2rem;
+    border-top: 1px solid var(--gray-200);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+@media (max-width: 768px) {
+  .card {
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .btn {
+    width: 100%;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .table-responsive {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  
+  .modern-header {
+    text-align: center;
+    padding: 1.5rem;
+  }
+  
+  .modern-header .d-flex {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .hero-section {
+    padding: 3rem 0;
+  }
+  
+  .display-3 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+    .display-3 {
+        font-size: 2rem;
+    }
+    
+    .card-body {
+        padding: 1.5rem;
+    }
+    
+    .btn-lg {
+        font-size: 1rem;
+        padding: 0.75rem 1.25rem;
+    }
+}
+
+/* ===== SCROLLBAR MODERNE ===== */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--gray-200);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-gradient);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #5a6fd8, #6a4190);
+}
+
+/* ===== CORRECTIONS SPÉCIFIQUES POUR LA VISIBILITÉ ===== */
+
+/* S'assurer que tous les liens sont visibles */
+a {
+    color: #667eea;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #5a6fd8;
+    text-decoration: underline;
+}
+
+/* S'assurer que les dropdowns sont visibles */
+.dropdown-menu {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    box-shadow: var(--shadow-lg);
+    border-radius: var(--radius-lg);
+}
+
+.dropdown-item {
+    color: var(--text-primary);
+}
+
+.dropdown-item:hover {
+    background-color: var(--gray-100);
+    color: var(--text-primary);
+}
+
+/* S'assurer que les modals sont visibles */
+.modal-content {
+    background: var(--white);
+    color: var(--text-primary);
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.modal-footer {
+    border-top: 1px solid var(--gray-200);
+}
+
+/* Correction pour les éléments Bootstrap */
+.btn-close {
+    background: transparent;
+    border: none;
+    opacity: 0.8;
+}
+
+.btn-close:hover {
+    opacity: 1;
+}
+
+/* Input groups */
+.input-group-text {
+    background: var(--gray-100);
+    border: 2px solid var(--gray-300);
+    color: var(--text-primary);
+}
+
+/* Pagination */
+.page-link {
+    color: #667eea;
+    background: var(--white);
+    border: 1px solid var(--gray-300);
+}
+
+.page-link:hover {
+    color: #5a6fd8;
+    background: var(--gray-100);
+}
+
+.page-item.active .page-link {
+    background: var(--primary-gradient);
+    border-color: transparent;
+    color: var(--white);
+}
+
+/* ===== STYLES POUR LA PAGE DE CONNEXION ===== */
+
+.min-vh-75 {
+    min-height: 75vh;
+}
+
+/* Formulaires flottants pour la connexion */
+.login-page .form-floating > .form-control {
+    height: calc(3.5rem + 2px);
+    border: 2px solid #e2e8f0;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    background: #ffffff;
+    color: #495057;
+}
+
+.login-page .form-floating > .form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    background: #ffffff;
+}
+
+.login-page .form-floating > label {
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.login-page .form-floating > .form-control:focus ~ label,
+.login-page .form-floating > .form-control:not(:placeholder-shown) ~ label {
+    color: #667eea;
+}
+
+.login-page .form-check-input:checked {
+    background-color: #667eea;
+    border-color: #667eea;
+}
+
+.login-page .form-check-label {
+    font-weight: 500;
+    color: #495057;
+}
+
+/* Carte de connexion */
+.login-page .card {
+    border-radius: 1rem;
+    overflow: hidden;
+    background: #ffffff;
+    color: #212529;
+}
+
+.login-page .card-header {
+    border-bottom: none;
+}
+
+.login-page .card-body {
+    background: #ffffff;
+    color: #212529;
+}
+
+/* Animation d'entrée pour la page de connexion */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-slide-in {
+    animation: slideInUp 0.6s ease-out;
+}
+
+/* Alert pour le message de contact admin */
+.login-page .alert-info {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(99, 102, 241, 0.1));
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    color: #1e40af;
+}
+
+.login-page .alert-info a {
+    color: #1d4ed8;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-page .alert-info a:hover {
+    color: #1e3a8a;
+    text-decoration: underline;
+}
+
+/* Responsive pour la page de connexion */
+@media (max-width: 576px) {
+    .login-page .card-body {
+        padding: 2rem 1.5rem;
+    }
+    
+    .login-page .card-header {
+        padding: 2rem 1.5rem;
+    }
+    
+    .login-page .container-fluid {
+        padding: 2rem 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .login-page .col-lg-5 {
+        max-width: 90%;
+    }
+}
+
+/* Focus states améliorés */
+.login-page .form-floating.focused {
+    transform: scale(1.02);
+    transition: transform 0.2s ease;
+}
+
+/* Bouton de connexion personnalisé */
+.login-page .btn-primary {
+    background: var(--primary-gradient);
+    border: none;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.login-page .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    color: #ffffff;
+}
+
+/* Card de démonstration */
+.login-page .bg-light {
+    background: linear-gradient(135deg, #f8fafc, #e2e8f0) !important;
+}
+
+/* Animation du robot */
+.login-page .fa-robot {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Effet de glow pour la carte principale */
+.login-page .card.shadow-lg {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07) !important;
+}
+
+.login-page .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12), 0 8px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Style pour l'email de contact */
+.login-page .contact-admin {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+    border-radius: 0.75rem;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    padding: 1rem;
+}
+
+/* Effet de typing pour le titre */
+.login-page .typing-effect {
+    border-right: 2px solid rgba(255, 255, 255, 0.7);
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50% { border-color: rgba(255, 255, 255, 0.7); }
+    51%, 100% { border-color: transparent; }
+}
+
+/* ===== STYLES POUR LA PAGE DE CHANGEMENT DE MOT DE PASSE ===== */
+
+.change-password-page .form-floating > .form-control {
+    height: calc(3.5rem + 2px);
+    border: 2px solid #e2e8f0;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    background: #ffffff;
+    color: #495057;
+}
+
+.change-password-page .form-floating > .form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    background: #ffffff;
+}
+
+.change-password-page .form-floating > label {
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.change-password-page .form-floating > .form-control:focus ~ label,
+.change-password-page .form-floating > .form-control:not(:placeholder-shown) ~ label {
+    color: #667eea;
+}
+
+/* Indicateur de force du mot de passe */
+.password-strength-bar .progress {
+    background-color: #e9ecef;
+    border-radius: 3px;
+}
+
+.password-strength-bar .progress-bar {
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+/* Validation en temps réel */
+.change-password-page .form-control.is-valid {
+    border-color: #198754;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+.change-password-page .form-control.is-invalid {
+    border-color: #dc3545;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+/* Cartes et alertes pour changement de mot de passe */
+.change-password-page .card {
+    border-radius: 1rem;
+    overflow: hidden;
+    background: #ffffff;
+    color: #212529;
+}
+
+.change-password-page .card-header {
+    border-bottom: none;
+}
+
+.change-password-page .card-body {
+    background: #ffffff;
+    color: #212529;
+}
+
+.change-password-page .alert-warning {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(249, 115, 22, 0.1));
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    color: #92400e;
+}
+
+/* ===== STYLES POUR FORGOT PASSWORD PAGE ===== */
+
+.forgot-password-page .form-floating > .form-control {
+    height: calc(3.5rem + 2px);
+    border: 2px solid #e2e8f0;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    background: #ffffff;
+    color: #495057;
+}
+
+.forgot-password-page .form-floating > .form-control:focus {
+    border-color: #f59e0b;
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+    background: #ffffff;
+}
+
+.forgot-password-page .form-floating > label {
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.forgot-password-page .form-floating > .form-control:focus ~ label,
+.forgot-password-page .form-floating > .form-control:not(:placeholder-shown) ~ label {
+    color: #f59e0b;
+}
+
+.forgot-password-page .btn-warning {
+    background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+    border: none;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.forgot-password-page .btn-warning:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
+    color: #ffffff;
+}
+
+/* ===== STYLES POUR RESET PASSWORD PAGE ===== */
+
+.reset-password-page .form-floating > .form-control {
+    height: calc(3.5rem + 2px);
+    border: 2px solid #e2e8f0;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    background: #ffffff;
+    color: #495057;
+}
+
+.reset-password-page .form-floating > .form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    background: #ffffff;
+}
+
+.reset-password-page .form-floating > label {
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.reset-password-page .form-floating > .form-control:focus ~ label,
+.reset-password-page .form-floating > .form-control:not(:placeholder-shown) ~ label {
+    color: #667eea;
+}
+
+/* Champ de code de vérification stylisé */
+.reset-password-page #VerificationCode {
+    text-align: center !important;
+    font-size: 1.5rem !important;
+    letter-spacing: 0.5rem !important;
+    font-family: 'Courier New', monospace !important;
+    font-weight: bold;
+}
+
+.reset-password-page #VerificationCode:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+    transform: scale(1.02);
+}
+
+/* Indicateur de force du mot de passe pour reset */
+.reset-password-page .password-strength-bar .progress {
+    background-color: #e9ecef;
+    border-radius: 3px;
+}
+
+.reset-password-page .password-strength-bar .progress-bar {
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+/* Validation en temps réel pour reset */
+.reset-password-page .form-control.is-valid {
+    border-color: #198754;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+.reset-password-page .form-control.is-invalid {
+    border-color: #dc3545;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+/* Cartes de conseils */
+.reset-password-page .card {
+    border-radius: 1rem;
+    overflow: hidden;
+    background: #ffffff;
+    color: #212529;
+}
+
+/* Responsive pour les pages de récupération */
+@media (max-width: 576px) {
+    .forgot-password-page .card-body,
+    .reset-password-page .card-body {
+        padding: 2rem 1.5rem;
+    }
+    
+    .forgot-password-page .card-header,
+    .reset-password-page .card-header {
+        padding: 2rem 1.5rem;
+    }
+    
+    .forgot-password-page .container-fluid,
+    .reset-password-page .container-fluid {
+        padding: 2rem 1rem;
+    }
+    
+    .reset-password-page #VerificationCode {
+        font-size: 1.2rem !important;
+        letter-spacing: 0.3rem !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .forgot-password-page .col-lg-5,
+    .reset-password-page .col-lg-6 {
+        max-width: 95%;
+    }
+}
+
+/* Focus states améliorés pour les pages de récupération */
+.forgot-password-page .form-floating.focused,
+.reset-password-page .form-floating.focused {
+    transform: scale(1.02);
+    transition: transform 0.2s ease;
+}
+
+/* Animations spécifiques pour les boutons */
+.forgot-password-page .btn:hover,
+.reset-password-page .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Style pour les codes de vérification */
+.verification-code-input {
+    font-family: 'Courier New', monospace;
+    font-size: 2rem;
+    text-align: center;
+    letter-spacing: 1rem;
+    font-weight: bold;
+    padding: 1rem;
+}
+
+/* Alert styles pour les pages de récupération */
+.forgot-password-page .alert,
+.reset-password-page .alert {
+    border-radius: 0.75rem;
+    border: none;
+    padding: 1rem 1.5rem;
+}
+
+.forgot-password-page .alert-warning,
+.reset-password-page .alert-warning {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(249, 115, 22, 0.1));
+    border-left: 4px solid #f59e0b;
+    color: #92400e;
+}
+
+.forgot-password-page .alert-success,
+.reset-password-page .alert-success {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(22, 163, 74, 0.1));
+    border-left: 4px solid #22c55e;
+    color: #15803d;
+}
+
+.forgot-password-page .alert-info,
+.reset-password-page .alert-info {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(99, 102, 241, 0.1));
+    border-left: 4px solid #3b82f6;
+    color: #1e40af;
+}
+
+/* Animation pour les éléments de la liste */
+.forgot-password-page ol li,
+.reset-password-page ul li {
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.forgot-password-page ol li:hover,
+.reset-password-page ul li:hover {
+    transform: translateX(5px);
+    color: #667eea;
+}

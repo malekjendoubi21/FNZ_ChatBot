@@ -1,0 +1,352 @@
+/* ===== CORRECTIONS DE VISIBILITÉ SPÉCIFIQUES ===== */
+
+/* Force la visibilité de tous les boutons */
+.btn {
+    min-height: 40px !important;
+    min-width: 80px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    border: 2px solid transparent !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* Boutons primaires - Fond bleu visible */
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: #ffffff !important;
+    border-color: transparent !important;
+    text-shadow: none !important;
+}
+
+/* Boutons success - Fond vert visible */
+.btn-success,
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%) !important;
+    color: #ffffff !important;
+    border-color: transparent !important;
+    text-shadow: none !important;
+}
+
+/* Boutons outline - Bordure et texte visibles */
+.btn-outline-primary,
+.btn-outline-secondary {
+    background: #ffffff !important;
+    border: 2px solid #667eea !important;
+    color: #667eea !important;
+    text-shadow: none !important;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-secondary:hover {
+    background: #667eea !important;
+    color: #ffffff !important;
+    border-color: #667eea !important;
+}
+
+/* Boutons secondaires */
+.btn-secondary {
+    background: #6c757d !important;
+    color: #ffffff !important;
+    border-color: #6c757d !important;
+}
+
+.btn-secondary:hover {
+    background: #5a6268 !important;
+    color: #ffffff !important;
+    border-color: #5a6268 !important;
+}
+
+/* Navigation - Liens visibles */
+.nav-link {
+    color: #495057 !important;
+    font-weight: 500 !important;
+}
+
+.nav-link:hover {
+    color: #667eea !important;
+}
+
+.navbar-brand {
+    color: #667eea !important;
+    font-weight: 700 !important;
+}
+
+/* Dropdown menu - Fond blanc et texte noir */
+.dropdown-menu {
+    background-color: #ffffff !important;
+    border: 1px solid #dee2e6 !important;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.dropdown-item {
+    color: #212529 !important;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: #f8f9fa !important;
+    color: #212529 !important;
+}
+
+/* Cards - Fond blanc et texte foncé */
+.card {
+    background-color: #ffffff !important;
+    border: 1px solid #dee2e6 !important;
+    color: #212529 !important;
+}
+
+.card-header {
+    background-color: #f8f9fa !important;
+    color: #212529 !important;
+    border-bottom: 1px solid #dee2e6 !important;
+}
+
+.card-body {
+    background-color: #ffffff !important;
+    color: #212529 !important;
+}
+
+/* Textes - Couleurs contrastées */
+.text-muted {
+    color: #6c757d !important;
+}
+
+.text-primary {
+    color: #212529 !important;
+}
+
+.text-secondary {
+    color: #6c757d !important;
+}
+
+/* Hero section - Texte blanc sur fond gradient */
+.hero-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: #ffffff !important;
+}
+
+.hero-section * {
+    color: #ffffff !important;
+}
+
+.hero-section .text-muted {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.hero-section .btn {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+    color: #ffffff !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+.hero-section .btn:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Tables - Visibilité améliorée */
+.table {
+    background-color: #ffffff !important;
+    color: #212529 !important;
+}
+
+.table thead th {
+    background-color: #f8f9fa !important;
+    color: #495057 !important;
+    border-bottom: 2px solid #dee2e6 !important;
+}
+
+.table tbody td {
+    color: #212529 !important;
+    border-bottom: 1px solid #dee2e6 !important;
+}
+
+.table tbody tr:hover {
+    background-color: #f8f9fa !important;
+}
+
+/* Forms - Champs visibles */
+.form-control {
+    background-color: #ffffff !important;
+    border: 2px solid #ced4da !important;
+    color: #495057 !important;
+}
+
+.form-control:focus {
+    background-color: #ffffff !important;
+    border-color: #667eea !important;
+    color: #495057 !important;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25) !important;
+}
+
+.form-label {
+    color: #495057 !important;
+    font-weight: 500 !important;
+}
+
+/* Floating labels */
+.form-floating > label {
+    color: #6c757d !important;
+}
+
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label {
+    color: #667eea !important;
+}
+
+/* Alertes - Couleurs contrastées */
+.alert-success {
+    background-color: #d1edff !important;
+    border-color: #b6d7ff !important;
+    color: #0f5132 !important;
+}
+
+.alert-info {
+    background-color: #cce7ff !important;
+    border-color: #b3d9ff !important;
+    color: #055160 !important;
+}
+
+.alert-warning {
+    background-color: #fff3cd !important;
+    border-color: #ffecb5 !important;
+    color: #664d03 !important;
+}
+
+.alert-danger {
+    background-color: #f8d7da !important;
+    border-color: #f5c6cb !important;
+    color: #721c24 !important;
+}
+
+/* Badges - Visibilité garantie */
+.badge {
+    font-weight: 600 !important;
+    color: #ffffff !important;
+}
+
+.bg-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+.bg-success {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%) !important;
+}
+
+.bg-warning {
+    background: #ffc107 !important;
+    color: #000000 !important;
+}
+
+.bg-danger {
+    background: #dc3545 !important;
+}
+
+/* Statistiques - Icônes et texte visibles */
+.stat-icon {
+    color: #ffffff !important;
+}
+
+.stat-icon i {
+    color: #ffffff !important;
+}
+
+/* Modern header - Visibilité améliorée */
+.modern-header {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(153, 102, 255, 0.1) 100%) !important;
+    color: #212529 !important;
+}
+
+.modern-header h1,
+.modern-header p {
+    color: #212529 !important;
+}
+
+/* Glass effect - Fond semi-transparent mais lisible */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    color: #212529 !important;
+}
+
+/* Corrections spécifiques pour les liens */
+a {
+    color: #667eea !important;
+    text-decoration: none !important;
+}
+
+a:hover {
+    color: #5a6fd8 !important;
+    text-decoration: underline !important;
+}
+
+/* Footer - Texte blanc sur fond sombre */
+.footer {
+    background: #343a40 !important;
+    color: #ffffff !important;
+}
+
+.footer * {
+    color: #ffffff !important;
+}
+
+/* Corrections pour les icônes */
+i.fas,
+i.far,
+i.fab {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Corrections pour les animations qui peuvent masquer du contenu */
+.animate__animated {
+    animation-duration: 0.3s !important;
+    animation-fill-mode: both !important;
+}
+
+/* S'assurer que rien n'est invisible */
+* {
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Mais permettre les transitions d'opacity pour les animations */
+.animate__animated {
+    opacity: 0;
+}
+
+.animate__animated.animate__fadeIn,
+.animate__animated.animate__fadeInUp,
+.animate__animated.animate__fadeInLeft,
+.animate__animated.animate__fadeInRight {
+    opacity: 1;
+}
+
+/* Debug - bordure rouge pour identifier les éléments problématiques */
+.debug {
+    border: 2px solid red !important;
+    background: yellow !important;
+}
+
+/* Responsive - S'assurer que tout reste visible sur mobile */
+@media (max-width: 768px) {
+    .btn {
+        width: auto !important;
+        min-width: 120px !important;
+        margin: 0.25rem !important;
+    }
+    
+    .card {
+        margin-bottom: 1rem !important;
+    }
+}
