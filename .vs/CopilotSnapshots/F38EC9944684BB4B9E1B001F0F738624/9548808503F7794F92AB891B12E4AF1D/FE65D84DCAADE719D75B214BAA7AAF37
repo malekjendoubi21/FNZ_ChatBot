@@ -1,0 +1,396 @@
+﻿using FNZ_ChatBot.Services;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using FNZ_ChatBot.Models;
+using FNZ_ChatBot.Data;
+
+namespace FNZ_ChatBot.Controllers
+{
+    [Authorize] // Nécessite une authentification
+    public class ChatController : Controller
+    {
+        private readonly IChatService _chatService;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ApplicationDbContext _context;
+
+        public ChatController(IChatService chatService, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+        {
+            _chatService = chatService;
+            _userManager = userManager;
+            _context = context;
+        }
+
+        // GET: ChatController
+        public async Task<ActionResult> Index(int? conversationId = null)
+        {
+            var userId = _userManager.GetUserId(User);
+            
+            // Si conversationId est fourni, charger cette conversation
+            if (conversationId.HasValue)
+            {
+                var conversation = await _context.Conversations
+                    .Include(c => c.Messages)
+                    .FirstOrDefaultAsync(c => c.Id == conversationId.Value && c.UserId == userId);
+                
+                if (conversation != null)
+                {
+                    ViewData["ConversationId"] = conversationId.Value;
+                    ViewData["ConversationTitle"] = conversation.Title;
+                    ViewData["Messages"] = conversation.Messages.OrderBy(m => m.CreatedDate).ToList();
+                }
+            }
+            
+            // Charger les conversations de l'utilisateur pour la sidebar
+            var conversations = await _context.Conversations
+                .Where(c => c.UserId == userId && c.IsActive)
+                .OrderByDescending(c => c.LastActivity)
+                .Take(10)
+                .ToListAsync();
+            
+            ViewData["Conversations"] = conversations;
+            
+            return View("GetResponse");
+        }
+
+        // Vue principale du chat avec suggestions
+        public async Task<IActionResult> GetResponse(int? conversationId = null)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            ViewBag.UserId = user.Id;
+            ViewBag.ConversationId = conversationId;
+
+            // Charger l'historique de la conversation si spécifiée
+            if (conversationId.HasValue)
+            {
+                var history = await _context.ConversationHistory
+                    .Where(h => h.ConversationId == conversationId && h.UserId == user.Id)
+                    .OrderBy(h => h.CreatedDate)
+                    .ToListAsync();
+
+                ViewBag.ConversationHistory = history;
+            }
+
+            // Générer des suggestions de questions pour les utilisateurs
+            var questionSuggestions = await GetQuestionSuggestionsForUser();
+            ViewBag.QuestionSuggestions = questionSuggestions;
+
+            return View();
+        }
+
+        // API pour envoyer une question et obtenir une réponse
+        [HttpPost]
+        public async Task<IActionResult> PostMessage([FromBody] QuestionInput input)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Json(new { success = false, message = "Question invalide" });
+            }
+
+            try
+            {
+                var user = await _userManager.GetUserAsync(User);
+                if (user == null)
+                {
+                    return Json(new { success = false, message = "Utilisateur non authentifié" });
+                }
+
+                var response = await _chatService.GetResponseAsync(input.Question, user.Id, input.ConversationId);
+
+                return Json(new 
+                { 
+                    success = true, 
+                    response = response,
+                    timestamp = DateTime.Now.ToString("HH:mm")
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Erreur lors du traitement de la question: " + ex.Message });
+            }
+        }
+
+        // API pour obtenir des suggestions de questions
+        [HttpGet]
+        public async Task<IActionResult> GetQuestionSuggestions()
+        {
+            var suggestions = await GetQuestionSuggestionsForUser();
+            return Json(new { suggestions });
+        }
+
+        private async Task<List<QuestionSuggestion>> GetQuestionSuggestionsForUser()
+        {
+            try
+            {
+                // Récupérer des questions populaires de la base de connaissances
+                var popularQuestions = await _context.KnowledgeBase
+                    .Where(k => k.IsActive)
+                    .OrderBy(k => Guid.NewGuid()) // Randomisation
+                    .Take(6)
+                    .ToListAsync();
+
+                var suggestions = new List<QuestionSuggestion>();
+
+                // Catégoriser et simplifier les questions pour les utilisateurs
+                var categories = new Dictionary<string, string>
+                {
+                    ["SQL"] = "💾",
+                    ["Git"] = "🔄", 
+                    ["API"] = "🌐",
+                    ["Entity Framework"] = "🗄️",
+                    ["C# / .NET"] = "⚡",
+                    ["Général"] = "❓"
+                };
+
+                foreach (var item in popularQuestions)
+                {
+                    var question = item.Question;
+                    var category = DetermineCategory(question);
+                    var icon = categories.GetValueOrDefault(category, "❓");
+                    var simplifiedQuestion = SimplifyQuestionForUser(question);
+
+                    suggestions.Add(new QuestionSuggestion
+                    {
+                        OriginalQuestion = question,
+                        DisplayQuestion = simplifiedQuestion,
+                        Category = category,
+                        Icon = icon
+                    });
+                }
+
+                // Ajouter quelques suggestions génériques si pas assez de données
+                if (suggestions.Count < 4)
+                {
+                    var defaultSuggestions = new List<QuestionSuggestion>
+                    {
+                        new() { OriginalQuestion = "Comment créer une connexion SQL ?", DisplayQuestion = "Connexion à une base de données", Category = "SQL", Icon = "💾" },
+                        new() { OriginalQuestion = "Comment cloner un repository Git ?", DisplayQuestion = "Cloner un projet Git", Category = "Git", Icon = "🔄" },
+                        new() { OriginalQuestion = "Comment créer une API REST ?", DisplayQuestion = "Créer une API web", Category = "API", Icon = "🌐" },
+                        new() { OriginalQuestion = "Comment faire une migration Entity Framework ?", DisplayQuestion = "Migration de base de données", Category = "Entity Framework", Icon = "🗄️" }
+                    };
+
+                    foreach (var defaultSuggestion in defaultSuggestions)
+                    {
+                        if (!suggestions.Any(s => s.Category == defaultSuggestion.Category))
+                        {
+                            suggestions.Add(defaultSuggestion);
+                        }
+                    }
+                }
+
+                return suggestions.Take(6).ToList();
+            }
+            catch (Exception ex)
+            {
+                // En cas d'erreur, retourner des suggestions par défaut
+                return GetDefaultSuggestions();
+            }
+        }
+
+        private string DetermineCategory(string question)
+        {
+            var questionLower = question.ToLower();
+            
+            if (questionLower.Contains("sql") || questionLower.Contains("database") || questionLower.Contains("base") && questionLower.Contains("données"))
+                return "SQL";
+            if (questionLower.Contains("git") || questionLower.Contains("github") || questionLower.Contains("repository"))
+                return "Git";
+            if (questionLower.Contains("api") || questionLower.Contains("rest") || questionLower.Contains("endpoint"))
+                return "API";
+            if (questionLower.Contains("entity") || questionLower.Contains("framework") || questionLower.Contains("migration"))
+                return "Entity Framework";
+            if (questionLower.Contains("c#") || questionLower.Contains("csharp") || questionLower.Contains(".net") || questionLower.Contains("async"))
+                return "C# / .NET";
+                
+            return "Général";
+        }
+
+        private string SimplifyQuestionForUser(string originalQuestion)
+        {
+            // Simplifier les questions pour les rendre plus attrayantes pour les utilisateurs
+            var simplified = originalQuestion
+                .Replace("Comment faire ", "")
+                .Replace("Comment créer ", "Créer ")
+                .Replace("Comment utiliser ", "Utiliser ")
+                .Replace("Quelle est la commande ", "Commande ")
+                .Replace(" en C# ?", "")
+                .Replace(" ?", "");
+
+            // Limiter la longueur
+            if (simplified.Length > 50)
+            {
+                simplified = simplified.Substring(0, 47) + "...";
+            }
+
+            return simplified;
+        }
+
+        private List<QuestionSuggestion> GetDefaultSuggestions()
+        {
+            return new List<QuestionSuggestion>
+            {
+                new() { OriginalQuestion = "Comment vous aider ?", DisplayQuestion = "Comment puis-je vous aider ?", Category = "Général", Icon = "❓" },
+                new() { OriginalQuestion = "Comment créer une connexion SQL ?", DisplayQuestion = "Connexion base de données", Category = "SQL", Icon = "💾" },
+                new() { OriginalQuestion = "Comment cloner un repository ?", DisplayQuestion = "Cloner un projet", Category = "Git", Icon = "🔄" },
+                new() { OriginalQuestion = "Comment créer une API ?", DisplayQuestion = "Créer une API", Category = "API", Icon = "🌐" }
+            };
+        }
+
+        public async Task<IActionResult> MyConversations()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var conversations = await _context.Conversations
+                .Where(c => c.UserId == user.Id && c.IsActive)
+                .OrderByDescending(c => c.LastActivity)
+                .ToListAsync();
+
+            return View(conversations);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateConversation([FromBody] CreateConversationRequest request)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return Json(new { success = false, message = "Non authentifié" });
+            }
+
+            var conversation = new Conversation
+            {
+                UserId = user.Id,
+                Title = request.Title ?? "Nouvelle conversation",
+                CreatedDate = DateTime.UtcNow,
+                LastActivity = DateTime.UtcNow,
+                IsActive = true
+            };
+
+            _context.Conversations.Add(conversation);
+            await _context.SaveChangesAsync();
+
+            return Json(new { success = true, conversationId = conversation.Id });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteConversation(int id)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return Json(new { success = false, message = "Non authentifié" });
+            }
+
+            var conversation = await _context.Conversations
+                .FirstOrDefaultAsync(c => c.Id == id && c.UserId == user.Id);
+
+            if (conversation != null)
+            {
+                conversation.IsActive = false;
+                await _context.SaveChangesAsync();
+                return Json(new { success = true });
+            }
+
+            return Json(new { success = false, message = "Conversation non trouvée" });
+        }
+
+        // Méthodes de compatibilité (peuvent être supprimées si non utilisées)
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult Edit(int id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+    }
+
+    public class CreateConversationRequest
+    {
+        public string? Title { get; set; }
+    }
+
+    public class QuestionSuggestion
+    {
+        public string OriginalQuestion { get; set; } = string.Empty;
+        public string DisplayQuestion { get; set; } = string.Empty;
+        public string Category { get; set; } = string.Empty;
+        public string Icon { get; set; } = string.Empty;
+    }
+
+    public class QuestionInput
+    {
+        public string Question { get; set; } = string.Empty;
+        public int? ConversationId { get; set; }
+    }
+
+    public class ChatRequest
+    {
+        public string UserInput { get; set; } = string.Empty;
+        public int? ConversationId { get; set; }
+    }
+}

@@ -44,12 +44,13 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
 });
 
-// Configuration du service de chat (utilise maintenant la base de données)
-builder.Services.AddScoped<IChatService, ChatService>();
+// Configuration du service de chat avec recherche sémantique pour TOUS les utilisateurs
+builder.Services.AddScoped<IChatService, SemanticChatService>();
 
 // Configuration des services existants
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IPasswordGeneratorService, PasswordGeneratorService>();
+builder.Services.AddScoped<KnowledgeEnhancementService>();
 
 // Configuration des nouveaux services pour le mot de passe oublié
 builder.Services.AddScoped<IVerificationCodeService, VerificationCodeService>();

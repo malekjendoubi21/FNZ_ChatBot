@@ -1,0 +1,112 @@
+﻿using FNZ_ChatBot.Models;
+using FNZ_ChatBot.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
+
+namespace FNZ_ChatBot.Services
+{
+    public class ChatService : IChatService
+    {
+        private readonly ApplicationDbContext _context;
+
+        public ChatService(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        public string GetResponse(string userInput)
+        {
+            return GetResponseAsync(userInput).Result;
+        }
+
+        public async Task<string> GetResponseAsync(string userInput, string? userId = null, int? conversationId = null)
+        {
+            var response = await GetResponseInternal(userInput);
+            
+            // Enregistrer dans l'historique si un utilisateur est connecté
+            if (!string.IsNullOrEmpty(userId))
+            {
+                var conversationHistory = new ConversationHistory
+                {
+                    UserId = userId,
+                    ConversationId = conversationId,
+                    Question = userInput,
+                    Response = response,
+                    CreatedDate = DateTime.UtcNow
+                };
+
+                _context.ConversationHistory.Add(conversationHistory);
+                await _context.SaveChangesAsync();
+            }
+
+            return response;
+        }
+
+        private async Task<string> GetResponseInternal(string userInput)
+        {
+            if (string.IsNullOrWhiteSpace(userInput))
+                return "Veuillez entrer une question.";
+
+            // Gestion des salutations
+            var greetings = new[] { "bonjour", "salut", "hello", "hey", "coucou" };
+            if (greetings.Any(g => userInput.ToLower().Contains(g)))
+                return "Bonjour ! Comment puis-je vous aider ?";
+
+            // Rechercher dans la base de connaissances
+            var knowledgeItems = await _context.KnowledgeBase
+                .Where(k => k.IsActive)
+                .ToListAsync();
+
+            var responses = new List<string>();
+            var subQuestions = SplitQuestions(userInput);
+
+            foreach (var question in subQuestions)
+            {
+                var bestMatches = knowledgeItems
+                    .Where(k => k.Question.ToLower().Contains(question.ToLower()) || 
+                               question.ToLower().Contains(k.Question.ToLower()) ||
+                               CalculateSimilarity(k.Question.ToLower(), question.ToLower()) > 0.3)
+                    .OrderByDescending(k => CalculateSimilarity(k.Question.ToLower(), question.ToLower()))
+                    .Take(2)
+                    .ToList();
+
+                if (bestMatches.Any())
+                {
+                    responses.Add($"**Question :** {question}\n" +
+                                  string.Join("\n", bestMatches.Select(r => "- " + r.Response)));
+                }
+            }
+
+            return responses.Any()
+                ? string.Join("\n\n", responses)
+                : "Désolé, je ne connais pas encore la réponse à cette question. Un administrateur peut ajouter cette information dans la base de connaissances.";
+        }
+
+        // Découpe une entrée utilisateur en sous-questions
+        private List<string> SplitQuestions(string input)
+        {
+            var rawParts = Regex.Split(input, @"\?| et | puis |&|\n|-", RegexOptions.IgnoreCase)
+                                .Select(q => q.Trim())
+                                .Where(q => !string.IsNullOrWhiteSpace(q))
+                                .ToList();
+
+            var filteredParts = rawParts.Where(q => q.Split(' ').Length >= 3).ToList();
+            return filteredParts.Any() ? filteredParts : new List<string> { input };
+        }
+
+        // Calcul simple de similarité entre deux chaînes
+        private double CalculateSimilarity(string text1, string text2)
+        {
+            if (string.IsNullOrEmpty(text1) || string.IsNullOrEmpty(text2))
+                return 0;
+
+            var words1 = text1.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            var words2 = text2.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+            var commonWords = words1.Intersect(words2).Count();
+            var totalWords = words1.Union(words2).Count();
+
+            return totalWords == 0 ? 0 : (double)commonWords / totalWords;
+        }
+    }
+}

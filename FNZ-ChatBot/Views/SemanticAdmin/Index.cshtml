@@ -1,0 +1,376 @@
+@{
+    ViewData["Title"] = "Administration Recherche Sémantique";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h2><i class="fas fa-brain me-2"></i>Administration Recherche Sémantique</h2>
+            <hr>
+        </div>
+    </div>
+
+    <!-- Statistiques générales -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body text-center">
+                    <h4>@ViewBag.KnowledgeCount</h4>
+                    <p>Éléments de base de connaissances</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body text-center">
+                    <h4>@ViewBag.TotalQuestions</h4>
+                    <p>Questions traitées</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body text-center">
+                    <h4><i class="fas fa-search"></i></h4>
+                    <p>Recherche sémantique</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body text-center">
+                    <h4><i class="fas fa-chart-line"></i></h4>
+                    <p>ML.NET + Cosinus</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Test de la recherche sémantique -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-flask me-2"></i>Test de Recherche Sémantique</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-action="TestSemantic">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" name="testQuestion" 
+                                   placeholder="Entrez une question pour tester la recherche sémantique..."
+                                   value="@ViewBag.TestQuestion" required>
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-play me-1"></i>Tester
+                            </button>
+                        </div>
+                    </form>
+
+                    @if (ViewBag.TestPerformed == true)
+                    {
+                        <div class="mt-3">
+                            <h6><strong>Question testée :</strong></h6>
+                            <p class="text-muted">@ViewBag.TestQuestion</p>
+                            
+                            <h6><strong>Réponse :</strong></h6>
+                            <div class="alert alert-info">
+                                @Html.Raw(ViewBag.TestResponse?.ToString()?.Replace("\n", "<br />"))
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <small><strong>Temps de réponse :</strong> @ViewBag.ResponseTime ms</small>
+                                </div>
+                                <div class="col-md-6">
+                                    <small><strong>Qualité :</strong> 
+                                        <span class="badge bg-@(ViewBag.ResponseQuality.ToString().Contains("Excellente") ? "success" : 
+                                                               ViewBag.ResponseQuality.ToString().Contains("Bonne") ? "primary" : 
+                                                               ViewBag.ResponseQuality.ToString().Contains("Moyenne") ? "warning" : "danger")">
+                                            @ViewBag.ResponseQuality
+                                        </span>
+                                    </small>
+                                </div>
+                            </div>
+
+                            <!-- Diagnostic détaillé -->
+                            @if (ViewBag.Diagnostic != null)
+                            {
+                                var diagnostic = ViewBag.Diagnostic as FNZ_ChatBot.Controllers.SearchDiagnostic;
+                                <div class="mt-4">
+                                    <h6><strong>Diagnostic de Recherche :</strong></h6>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <p><strong>Éléments dans la base :</strong> @diagnostic.TotalKnowledgeItems</p>
+                                                    <p><strong>Correspondances exactes :</strong> 
+                                                        <span class="badge bg-@(diagnostic.ExactMatches > 0 ? "success" : "danger")">
+                                                            @diagnostic.ExactMatches
+                                                        </span>
+                                                    </p>
+                                                    <p><strong>Correspondances par mots-clés :</strong> 
+                                                        <span class="badge bg-@(diagnostic.KeywordMatches > 0 ? "success" : "warning")">
+                                                            @diagnostic.KeywordMatches
+                                                        </span>
+                                                    </p>
+                                                    <p><strong>Réponse standard :</strong> 
+                                                        <span class="badge bg-@(diagnostic.IsStandardResponse ? "info" : "secondary")">
+                                                            @(diagnostic.IsStandardResponse ? "Oui" : "Non")
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p><strong>Mots extraits :</strong> 
+                                                        @string.Join(", ", diagnostic.ExtractedWords)
+                                                    </p>
+                                                    <p><strong>Mots-clés techniques :</strong> 
+                                                        @(diagnostic.TechnicalKeywords.Any() ? string.Join(", ", diagnostic.TechnicalKeywords) : "Aucun")
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            
+                                            @if (diagnostic.ExampleMatches.Any())
+                                            {
+                                                <h6 class="mt-3"><strong>Exemples de correspondances :</strong></h6>
+                                                <ul class="list-group list-group-flush">
+                                                    @foreach (var match in diagnostic.ExampleMatches)
+                                                    {
+                                                        <li class="list-group-item">@match</li>
+                                                    }
+                                                </ul>
+                                            }
+
+                                            @if (!string.IsNullOrEmpty(diagnostic.Error))
+                                            {
+                                                <div class="alert alert-danger mt-3">
+                                                    <strong>Erreur :</strong> @diagnostic.Error
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+
+                    <!-- Exemples de questions à tester - DYNAMIQUES -->
+                    <div class="mt-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h6><strong>Exemples de questions à tester :</strong></h6>
+                            <button type="button" class="btn btn-outline-secondary btn-sm" id="refreshExamples">
+                                <i class="fas fa-sync me-1"></i>Actualiser
+                            </button>
+                        </div>
+                        <div id="dynamic-examples" class="d-flex flex-wrap gap-2">
+                            @if (ViewBag.DynamicExamples != null)
+                            {
+                                var examples = ViewBag.DynamicExamples as List<FNZ_ChatBot.Controllers.QuestionExample>;
+                                foreach (var example in examples)
+                                {
+                                    <button type="button" class="btn btn-outline-secondary btn-sm test-example" 
+                                            data-question="@example.Question"
+                                            title="@example.Question">
+                                        <span class="badge bg-info me-1">@example.Category</span>
+                                        @example.Label
+                                    </button>
+                                }
+                            }
+                            else
+                            {
+                                <!-- Exemples par défaut en cas d'erreur -->
+                                <button type="button" class="btn btn-outline-secondary btn-sm test-example" 
+                                        data-question="comment créer une connexion SQL">
+                                    <span class="badge bg-primary me-1">SQL</span>Connexion SQL
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm test-example" 
+                                        data-question="migration GitHub">
+                                    <span class="badge bg-success me-1">Git</span>Migration GitHub
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm test-example" 
+                                        data-question="API REST ASP.NET">
+                                    <span class="badge bg-warning me-1">API</span>API REST
+                                </button>
+                            }
+                        </div>
+                        
+                        <div class="mt-2">
+                            <small class="text-muted">
+                                <i class="fas fa-info-circle me-1"></i>
+                                Ces exemples sont générés automatiquement à partir de votre base de connaissances
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-tools me-2"></i>Actions</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-action="RefreshKnowledge" class="mb-3">
+                        <button type="submit" class="btn btn-success w-100 mb-2">
+                            <i class="fas fa-sync me-1"></i>Actualiser le Cache
+                        </button>
+                    </form>
+                    
+                    <form method="post" asp-action="EnhanceKnowledge" class="mb-3">
+                        <button type="submit" class="btn btn-warning w-100 mb-2">
+                            <i class="fas fa-magic me-1"></i>Enrichir la base
+                        </button>
+                    </form>
+                    
+                    <a href="@Url.Action("Analytics")" class="btn btn-info w-100">
+                        <i class="fas fa-chart-bar me-1"></i>Voir les Analytics
+                    </a>
+                </div>
+            </div>
+
+            <!-- Conseils d'optimisation -->
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h6><i class="fas fa-lightbulb me-2"></i>Conseils d'Optimisation</h6>
+                </div>
+                <div class="card-body">
+                    <small>
+                        <ul class="mb-0">
+                            <li>Utilisez des mots-clés techniques (SQL, Git, API)</li>
+                            <li>Formulez des questions complètes</li>
+                            <li>Évitez les abréviations non standard</li>
+                            <li>Testez régulièrement les nouvelles questions</li>
+                        </ul>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Suggestions d'amélioration -->
+    @if (ViewBag.Suggestions != null && ((List<string>)ViewBag.Suggestions).Any())
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-lightbulb me-2"></i>Suggestions d'Amélioration</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            @foreach (var suggestion in (List<string>)ViewBag.Suggestions)
+                            {
+                                <li class="list-group-item">
+                                    <i class="fas fa-exclamation-triangle text-warning me-2"></i>
+                                    @suggestion
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- Instructions -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-info-circle me-2"></i>Comment fonctionne la recherche sémantique améliorée</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6><strong>Étapes du processus :</strong></h6>
+                            <ol>
+                                <li><strong>Réponses standard</strong> - Salutations et questions courantes</li>
+                                <li><strong>Recherche textuelle avancée</strong> - Mots-clés techniques et correspondances</li>
+                                <li><strong>Recherche sémantique</strong> - ML.NET avec similarité cosinus</li>
+                                <li><strong>Recherche de secours</strong> - Critères très souples</li>
+                                <li><strong>Formatage intelligent</strong> - Présentation optimisée</li>
+                            </ol>
+                        </div>
+                        <div class="col-md-6">
+                            <h6><strong>Améliorations apportées :</strong></h6>
+                            <ul>
+                                <li><i class="fas fa-check text-success me-1"></i>Exemples dynamiques basés sur vos données</li>
+                                <li><i class="fas fa-check text-success me-1"></i>Priorité à la recherche textuelle (plus rapide)</li>
+                                <li><i class="fas fa-check text-success me-1"></i>Seuils de similarité plus bas</li>
+                                <li><i class="fas fa-check text-success me-1"></i>Recherche de secours avec critères souples</li>
+                                <li><i class="fas fa-check text-success me-1"></i>Mots-clés techniques étendus</li>
+                                <li><i class="fas fa-check text-success me-1"></i>Diagnostic détaillé pour le débogage</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Fonctionnalité pour tester rapidement les exemples
+        function attachExampleListeners() {
+            document.querySelectorAll('.test-example').forEach(button => {
+                button.addEventListener('click', function() {
+                    const question = this.getAttribute('data-question');
+                    document.querySelector('input[name="testQuestion"]').value = question;
+                    document.querySelector('form[asp-action="TestSemantic"]').submit();
+                });
+            });
+        }
+
+        // Attacher les listeners au chargement
+        attachExampleListeners();
+
+        // Actualiser les exemples dynamiques
+        document.getElementById('refreshExamples').addEventListener('click', function() {
+            const button = this;
+            const originalContent = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Chargement...';
+            button.disabled = true;
+
+            fetch('@Url.Action("GetDynamicExamples")')
+                .then(response => response.json())
+                .then(data => {
+                    const container = document.getElementById('dynamic-examples');
+                    container.innerHTML = '';
+                    
+                    data.examples.forEach(example => {
+                        const button = document.createElement('button');
+                        button.type = 'button';
+                        button.className = 'btn btn-outline-secondary btn-sm test-example';
+                        button.setAttribute('data-question', example.question);
+                        button.title = example.question;
+                        button.innerHTML = `<span class="badge bg-info me-1">${example.category}</span>${example.label}`;
+                        container.appendChild(button);
+                    });
+                    
+                    // Réattacher les listeners
+                    attachExampleListeners();
+                })
+                .catch(error => {
+                    console.error('Erreur:', error);
+                    alert('Erreur lors de l\'actualisation des exemples');
+                })
+                .finally(() => {
+                    button.innerHTML = originalContent;
+                    button.disabled = false;
+                });
+        });
+
+        // Auto-refresh des suggestions
+        function refreshSuggestions() {
+            fetch('@Url.Action("Analytics")')
+                .then(response => response.text())
+                .then(data => {
+                    console.log('Analytics mises à jour');
+                })
+                .catch(error => console.error('Erreur:', error));
+        }
+
+        // Actualiser toutes les 30 secondes
+        setInterval(refreshSuggestions, 30000);
+    </script>
+}

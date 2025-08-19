@@ -37,15 +37,21 @@
                                     </p>
                                 </div>
                                 <div class="card-footer bg-transparent">
-                                    <div class="d-grid gap-2 d-md-flex">
-                                        <a asp-controller="Chat" asp-action="Index" asp-route-conversationId="@conversation.Id" 
-                                           class="btn btn-primary btn-sm flex-fill">
-                                            <i class="fas fa-play"></i> Continuer
-                                        </a>
+                                    <div class="d-grid gap-2">
+                                        <div class="btn-group">
+                                            <a asp-controller="Chat" asp-action="Index" asp-route-conversationId="@conversation.Id" 
+                                               class="btn btn-primary btn-sm">
+                                                <i class="fas fa-play"></i> Continuer
+                                            </a>
+                                            <a asp-controller="Chat" asp-action="ConversationHistory" asp-route-conversationId="@conversation.Id" 
+                                               class="btn btn-outline-info btn-sm">
+                                                <i class="fas fa-history"></i> Historique
+                                            </a>
+                                        </div>
                                         <form asp-action="DeleteConversation" asp-route-id="@conversation.Id" method="post" class="d-inline">
-                                            <button type="submit" class="btn btn-outline-danger btn-sm" 
+                                            <button type="submit" class="btn btn-outline-danger btn-sm w-100" 
                                                     onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette conversation ?')">
-                                                <i class="fas fa-trash"></i>
+                                                <i class="fas fa-trash"></i> Supprimer
                                             </button>
                                         </form>
                                     </div>

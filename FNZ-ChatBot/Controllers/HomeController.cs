@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using FNZ_ChatBot.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FNZ_ChatBot.Controllers
@@ -7,14 +8,24 @@ namespace FNZ_ChatBot.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
+            _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                if (user != null)
+                {
+                    ViewBag.CurrentUser = user;
+                }
+            }
             return View();
         }
 

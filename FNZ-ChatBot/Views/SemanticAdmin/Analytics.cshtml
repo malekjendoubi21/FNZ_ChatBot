@@ -1,0 +1,274 @@
+@model SemanticAnalyticsViewModel
+@{
+    ViewData["Title"] = "Analytics Recherche Sémantique";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h2><i class="fas fa-chart-bar me-2"></i>Analytics Recherche Sémantique</h2>
+            <a href="@Url.Action("Index")" class="btn btn-secondary mb-3">
+                <i class="fas fa-arrow-left me-1"></i>Retour
+            </a>
+            <hr>
+        </div>
+    </div>
+
+    <!-- Métriques de performance -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body text-center">
+                    <h4>@Model.TotalConversations</h4>
+                    <p>Total Conversations</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body text-center">
+                    <h4>@Model.ActiveKnowledgeItems</h4>
+                    <p>Éléments Actifs</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body text-center">
+                    <h4>@Model.SuccessRate.ToString("F1")%</h4>
+                    <p>Taux de Succès</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body text-center">
+                    <h4>@Model.UnansweredQuestions.Sum(q => q.Count)</h4>
+                    <p>Questions Sans Réponse</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Questions les plus fréquentes -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-question-circle me-2"></i>Questions les Plus Fréquentes</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.MostFrequentQuestions.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Question</th>
+                                        <th class="text-end">Fréquence</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var question in Model.MostFrequentQuestions)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @(question.Question.Length > 50 ? 
+                                                  question.Question.Substring(0, 50) + "..." : 
+                                                  question.Question)
+                                            </td>
+                                            <td class="text-end">
+                                                <span class="badge bg-primary">@question.Count</span>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="text-muted text-center">Aucune donnée disponible</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Questions sans réponses satisfaisantes -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-exclamation-triangle text-warning me-2"></i>Questions Sans Réponse</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.UnansweredQuestions.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Question</th>
+                                        <th class="text-end">Occurrences</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var question in Model.UnansweredQuestions)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @(question.Question.Length > 50 ? 
+                                                  question.Question.Substring(0, 50) + "..." : 
+                                                  question.Question)
+                                            </td>
+                                            <td class="text-end">
+                                                <span class="badge bg-warning">@question.Count</span>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="alert alert-warning mt-3">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Suggestion :</strong> Ces questions pourraient être ajoutées à la base de connaissances 
+                            pour améliorer le taux de succès.
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-success">
+                            <i class="fas fa-check-circle me-2"></i>
+                            Excellent ! Aucune question récurrente sans réponse.
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Graphique de performance (simulation) -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-chart-line me-2"></i>Performance de la Recherche Sémantique</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <h3 class="text-success">@Model.SuccessRate.ToString("F1")%</h3>
+                                <p>Taux de Réussite Global</p>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" role="progressbar" 
+                                         style="width: @Model.SuccessRate%"
+                                         aria-valuenow="@Model.SuccessRate" aria-valuemin="0" aria-valuemax="100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                <h3 class="text-primary">@Model.ActiveKnowledgeItems</h3>
+                                <p>Base de Connaissances</p>
+                                <div class="progress">
+                                    <div class="progress-bar bg-primary" role="progressbar" 
+                                         style="width: @(Math.Min(Model.ActiveKnowledgeItems * 2, 100))%">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center">
+                                @{
+                                    var failureRate = Model.TotalConversations > 0 ? 
+                                        (double)Model.UnansweredQuestions.Sum(q => q.Count) / Model.TotalConversations * 100 : 0;
+                                }
+                                <h3 class="text-warning">@failureRate.ToString("F1")%</h3>
+                                <p>Questions Non Résolues</p>
+                                <div class="progress">
+                                    <div class="progress-bar bg-warning" role="progressbar" 
+                                         style="width: @failureRate%">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recommandations -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-recommendations me-2"></i>Recommandations d'Amélioration</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6><strong>Améliorations suggérées :</strong></h6>
+                            <ul class="list-group list-group-flush">
+                                @if (Model.SuccessRate < 80)
+                                {
+                                    <li class="list-group-item">
+                                        <i class="fas fa-plus text-success me-2"></i>
+                                        Ajouter plus de contenu à la base de connaissances
+                                    </li>
+                                }
+                                @if (Model.UnansweredQuestions.Any())
+                                {
+                                    <li class="list-group-item">
+                                        <i class="fas fa-edit text-primary me-2"></i>
+                                        Enrichir les questions existantes avec des variations
+                                    </li>
+                                }
+                                @if (Model.ActiveKnowledgeItems < 50)
+                                {
+                                    <li class="list-group-item">
+                                        <i class="fas fa-database text-info me-2"></i>
+                                        Augmenter la taille de la base de connaissances
+                                    </li>
+                                }
+                                <li class="list-group-item">
+                                    <i class="fas fa-brain text-warning me-2"></i>
+                                    Ajuster les seuils de similarité cosinus
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6><strong>Métriques à surveiller :</strong></h6>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <strong>Temps de réponse :</strong> Moyenne < 500ms
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Taux de succès :</strong> Objectif > 85%
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Questions récurrentes :</strong> À transformer en FAQ
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Précision sémantique :</strong> Seuil cosinus > 0.3
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Actualisation automatique des données
+        setInterval(function() {
+            // Recharger la page toutes les 5 minutes pour avoir des données fraîches
+            // window.location.reload();
+        }, 300000);
+    </script>
+}

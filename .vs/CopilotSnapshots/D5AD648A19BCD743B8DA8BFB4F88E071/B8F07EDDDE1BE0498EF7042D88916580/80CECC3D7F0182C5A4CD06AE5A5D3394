@@ -1,0 +1,355 @@
+﻿@{
+    ViewData["Title"] = "Chatbot";
+    var conversationId = ViewData["ConversationId"] as int?;
+    var conversationTitle = ViewData["ConversationTitle"] as string;
+    var messages = ViewData["Messages"] as List<ConversationHistory> ?? new List<ConversationHistory>();
+    var conversations = ViewData["Conversations"] as List<Conversation> ?? new List<Conversation>();
+}
+
+<style>
+    body {
+        background: linear-gradient(135deg, #121212, #1e1e1e);
+        color: #fff;
+        font-family: Arial, sans-serif;
+    }
+
+    .chat-container {
+        display: flex;
+        height: 85vh;
+        max-width: 1400px;
+        margin: 0 auto;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    .sidebar {
+        width: 300px;
+        background: #2a2a2a;
+        padding: 20px;
+        overflow-y: auto;
+        border-right: 1px solid #444;
+    }
+
+    .main-chat {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        background: #222;
+    }
+
+    #chatContainer {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+        border-bottom: 1px solid #444;
+    }
+
+    .conversation-item {
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .conversation-item:hover {
+        background: #3a3a3a;
+    }
+
+    .conversation-item.active {
+        background: #007bff;
+    }
+
+    .conversation-title {
+        font-size: 14px;
+        font-weight: bold;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .conversation-date {
+        font-size: 12px;
+        color: #888;
+    }
+
+    .message-wrapper {
+        display: flex;
+        margin: 10px 0;
+        align-items: flex-start;
+    }
+
+    .message-wrapper.user {
+        justify-content: flex-end;
+    }
+
+    .message-bubble {
+        padding: 14px 18px;
+        border-radius: 18px;
+        max-width: 70%;
+        font-size: 15px;
+        line-height: 1.4;
+        white-space: pre-line;
+    }
+
+    .user .message-bubble {
+        background: #007bff;
+        color: #fff;
+        border-bottom-right-radius: 4px;
+    }
+
+    .bot .message-bubble {
+        background: #333;
+        color: #f1f1f1;
+        border-bottom-left-radius: 4px;
+    }
+
+    .avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        margin-right: 8px;
+        background-size: cover;
+    }
+
+    .user .avatar {
+        display: none;
+    }
+
+    #inputBar {
+        padding: 20px;
+        display: flex;
+        background: #333;
+        gap: 10px;
+    }
+
+    #userInput {
+        flex: 1;
+        padding: 12px;
+        border: none;
+        border-radius: 6px;
+        background: #1e1e1e;
+        color: #fff;
+        font-size: 15px;
+    }
+
+    #sendBtn {
+        padding: 12px 20px;
+        background: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    #sendBtn:hover {
+        background: #0056b3;
+    }
+
+    .typing-indicator {
+        font-size: 14px;
+        color: #888;
+        margin: 5px 0;
+        font-style: italic;
+    }
+
+    .chat-header {
+        padding: 20px;
+        border-bottom: 1px solid #444;
+        background: #2a2a2a;
+    }
+
+    .new-conversation-btn {
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 10px;
+        background: #28a745;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    .new-conversation-btn:hover {
+        background: #218838;
+    }
+</style>
+
+<div class="chat-container">
+    <!-- Sidebar avec les conversations -->
+    <div class="sidebar">
+        <button class="new-conversation-btn" onclick="startNewConversation()">
+            <i class="fas fa-plus"></i> Nouvelle Conversation
+        </button>
+        
+        <h6 class="text-muted mb-3">Conversations récentes</h6>
+        
+        @if (conversations.Any())
+        {
+            @foreach (var conv in conversations)
+            {
+                <div class="conversation-item @(conversationId == conv.Id ? "active" : "")" 
+                     onclick="loadConversation(@conv.Id)">
+                    <div class="conversation-title">@conv.Title</div>
+                    <div class="conversation-date">@conv.LastActivity.ToString("dd/MM HH:mm")</div>
+                </div>
+            }
+        }
+        else
+        {
+            <p class="text-muted">Aucune conversation</p>
+        }
+        
+        <hr />
+        <a href="@Url.Action("MyConversations")" class="btn btn-outline-light btn-sm w-100">
+            <i class="fas fa-list"></i> Toutes mes conversations
+        </a>
+    </div>
+
+    <!-- Zone de chat principale -->
+    <div class="main-chat">
+        <div class="chat-header">
+            <h5 class="mb-0">
+                @if (!string.IsNullOrEmpty(conversationTitle))
+                {
+                    <i class="fas fa-comments"></i> @conversationTitle
+                }
+                else
+                {
+                    <i class="fas fa-robot"></i> @("Assistant")
+                }
+            </h5>
+        </div>
+
+        <div id="chatContainer">
+            @if (messages.Any())
+            {
+                @foreach (var message in messages)
+                {
+                    <!-- Message utilisateur -->
+                    <div class="message-wrapper user">
+                        <div class="message-bubble">@message.Question</div>
+                    </div>
+                    
+                    <!-- Réponse bot -->
+                    <div class="message-wrapper bot">
+                        <div class="avatar" style="background-image: url('https://cdn-icons-png.flaticon.com/512/4712/4712100.png')"></div>
+                        <div class="message-bubble">@Html.Raw(message.Response.Replace("\n", "<br />"))</div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="text-center text-muted mt-5">
+                    <i class="fas fa-robot fa-3x mb-3"></i>
+                    <h5>Bonjour ! Comment puis-je vous aider aujourd'hui ?</h5>
+                    <p>Posez-moi une question pour commencer la conversation.</p>
+                </div>
+            }
+        </div>
+
+        <div id="inputBar">
+            <input id="userInput" type="text" placeholder="Posez votre question..." />
+            <button id="sendBtn">
+                <i class="fas fa-paper-plane"></i> Envoyer
+            </button>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const chatContainer = document.getElementById("chatContainer");
+        const userInput = document.getElementById("userInput");
+        const sendBtn = document.getElementById("sendBtn");
+        let currentConversationId = @(conversationId?.ToString() ?? "null");
+
+        function addMessage(content, sender) {
+            const wrapper = document.createElement("div");
+            wrapper.className = "message-wrapper " + sender;
+
+            const bubble = document.createElement("div");
+            bubble.className = "message-bubble";
+            
+            if (sender === "bot") {
+                bubble.innerHTML = content.replace(/\n/g, '<br />');
+            } else {
+                bubble.innerText = content;
+            }
+
+            if (sender === "bot") {
+                const avatar = document.createElement("div");
+                avatar.className = "avatar";
+                avatar.style.backgroundImage = "url('https://cdn-icons-png.flaticon.com/512/4712/4712100.png')";
+                wrapper.appendChild(avatar);
+            }
+
+            wrapper.appendChild(bubble);
+            chatContainer.appendChild(wrapper);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const question = userInput.value.trim();
+            if (!question) return;
+
+            addMessage(question, "user");
+            userInput.value = "";
+
+            const typingDiv = document.createElement("div");
+            typingDiv.className = "typing-indicator";
+            typingDiv.innerText = "Le chatbot écrit...";
+            chatContainer.appendChild(typingDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            try {
+                const res = await fetch('/Chat/GetResponse', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        userInput: question,
+                        conversationId: currentConversationId
+                    })
+                });
+
+                chatContainer.removeChild(typingDiv);
+
+                if (res.ok) {
+                    const data = await res.json();
+                    addMessage(data.answer, "bot");
+                    
+                    // Mettre à jour l'ID de conversation pour les prochains messages
+                    if (data.conversationId && !currentConversationId) {
+                        currentConversationId = data.conversationId;
+                        // Recharger la page pour afficher la conversation dans la sidebar
+                        setTimeout(() => {
+                            window.location.href = '/Chat/Index?conversationId=' + data.conversationId;
+                        }, 1000);
+                    }
+                } else {
+                    addMessage("Erreur : impossible d'obtenir une réponse.", "bot");
+                }
+            } catch (error) {
+                chatContainer.removeChild(typingDiv);
+                addMessage("Erreur de connexion.", "bot");
+            }
+        }
+
+        function startNewConversation() {
+            window.location.href = '/Chat/Index';
+        }
+
+        function loadConversation(conversationId) {
+            window.location.href = '/Chat/Index?conversationId=' + conversationId;
+        }
+
+        sendBtn.addEventListener("click", sendMessage);
+        userInput.addEventListener("keypress", (e) => { 
+            if (e.key === "Enter") sendMessage(); 
+        });
+
+        // Focus sur l'input au chargement
+        userInput.focus();
+    </script>
+}

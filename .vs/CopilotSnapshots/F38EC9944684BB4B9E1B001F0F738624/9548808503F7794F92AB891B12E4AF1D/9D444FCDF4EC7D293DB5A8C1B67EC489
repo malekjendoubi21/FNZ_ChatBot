@@ -1,0 +1,136 @@
+﻿@model IEnumerable<ConversationHistory>
+@{
+    ViewData["Title"] = "Historique de la conversation";
+    var conversationTitle = ViewBag.ConversationTitle?.ToString() ?? "Conversation";
+    var conversationId = ViewBag.ConversationId as int?;
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2>Historique de la conversation</h2>
+                    <h5 class="text-muted">@conversationTitle</h5>
+                </div>
+                <div class="btn-group">
+                    <a asp-action="MyConversations" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Retour aux conversations
+                    </a>
+                    @if (conversationId.HasValue)
+                    {
+                        <a asp-action="Index" asp-route-conversationId="@conversationId" class="btn btn-primary">
+                            <i class="fas fa-play"></i> Continuer la conversation
+                        </a>
+                    }
+                </div>
+            </div>
+            
+            @if (Model.Any())
+            {
+                <div class="chat-history-container">
+                    <div class="chat-timeline">
+                        @foreach (var message in Model)
+                        {
+                            <div class="timeline-item">
+                                <div class="timeline-marker">
+                                    <span class="timeline-time">@message.CreatedDate.ToString("HH:mm")</span>
+                                </div>
+                                
+                                <!-- Message utilisateur -->
+                                <div class="message-block user-message">
+                                    <div class="message-header">
+                                        <div class="message-avatar user">
+                                            <i class="fas fa-user"></i>
+                                        </div>
+                                        <div class="message-info">
+                                            <strong>Vous</strong>
+                                            <span class="message-timestamp">@message.CreatedDate.ToString("dd/MM/yyyy à HH:mm")</span>
+                                        </div>
+                                    </div>
+                                    <div class="message-content user">
+                                        @message.Question
+                                    </div>
+                                </div>
+                                
+                                <!-- Réponse du bot -->
+                                <div class="message-block bot-message">
+                                    <div class="message-header">
+                                        <div class="message-avatar bot">
+                                            <i class="fas fa-robot"></i>
+                                        </div>
+                                        <div class="message-info">
+                                            <strong>Assistant FNZ</strong>
+                                            <span class="message-timestamp">@message.CreatedDate.ToString("dd/MM/yyyy à HH:mm")</span>
+                                        </div>
+                                    </div>
+                                    <div class="message-content bot">
+                                        @Html.Raw(message.Response.Replace("\n", "<br />"))
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                
+                <div class="conversation-stats mt-4">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="stat-card">
+                                <i class="fas fa-comments text-primary"></i>
+                                <div class="stat-info">
+                                    <span class="stat-number">@Model.Count()</span>
+                                    <span class="stat-label">Messages échangés</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="stat-card">
+                                <i class="fas fa-calendar text-success"></i>
+                                <div class="stat-info">
+                                    <span class="stat-number">@Model.First().CreatedDate.ToString("dd/MM/yyyy")</span>
+                                    <span class="stat-label">Date de début</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="stat-card">
+                                <i class="fas fa-clock text-info"></i>
+                                <div class="stat-info">
+                                    <span class="stat-number">@Model.Last().CreatedDate.ToString("HH:mm")</span>
+                                    <span class="stat-label">Dernière activité</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info text-center" role="alert">
+                    <i class="fas fa-info-circle fa-2x mb-3"></i>
+                    <h4>Aucun historique disponible</h4>
+                    <p>Cette conversation ne contient pas encore de messages.</p>
+                    @if (conversationId.HasValue)
+                    {
+                        <a asp-action="Index" asp-route-conversationId="@conversationId" class="btn btn-primary">
+                            <i class="fas fa-play"></i> Commencer à discuter
+                        </a>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+@section Styles {
+    <link href="~/css/conversation-history.css" rel="stylesheet" />
+}

@@ -4,20 +4,40 @@
     "response": "Tu peux utiliser `SqlConnection` avec une chaîne de connexion. N'oublie pas d'ouvrir et fermer la connexion correctement, ou utilise `using` pour la fermer automatiquement."
   },
   {
+    "question": "Comment créer une connexion SQL ?",
+    "response": "Pour créer une connexion SQL : 1) Ajoute la chaîne de connexion dans appsettings.json, 2) Utilise SqlConnection avec cette chaîne, 3) Ouvre la connexion avec Open(), 4) Ferme-la avec Close() ou utilise using."
+  },
+  {
+    "question": "Connexion base de données",
+    "response": "Pour se connecter à une base de données : string connectionString = \"Server=myServer;Database=myDB;Trusted_Connection=true;\"; using (var connection = new SqlConnection(connectionString)) { connection.Open(); // ton code ici }"
+  },
+  {
     "question": "Comment exécuter une requête SELECT en C# ?",
     "response": "Utilise `SqlCommand` avec `ExecuteReader()` pour lire les résultats. Parcours les données avec un `SqlDataReader`."
   },
   {
     "question": "Comment faire une API REST avec ASP.NET Core ?",
-    "response": "Tu dois créer un contrôleur avec l’attribut `[ApiController]` et utiliser des routes `[HttpGet]`, `[HttpPost]`, etc. Tu peux utiliser Entity Framework pour la couche de données."
+    "response": "Tu dois créer un contrôleur avec l'attribut `[ApiController]` et utiliser des routes `[HttpGet]`, `[HttpPost]`, etc. Tu peux utiliser Entity Framework pour la couche de données."
   },
   {
     "question": "Comment faire une migration avec Entity Framework ?",
     "response": "Utilise la commande `Add-Migration NomMigration` dans la console du gestionnaire de package, puis `Update-Database` pour appliquer les changements."
   },
   {
+    "question": "Migration Entity Framework",
+    "response": "Pour faire une migration EF : 1) Add-Migration NomDeLaMigration 2) Update-Database. Ou en ligne de commande : dotnet ef migrations add NomMigration puis dotnet ef database update."
+  },
+  {
+    "question": "Comment migrer vers GitHub ?",
+    "response": "Pour migrer vers GitHub : 1) Crée un repo sur GitHub, 2) git remote add origin URL_DU_REPO, 3) git push -u origin main. Si tu as déjà un projet local : git init, git add ., git commit -m \"Initial commit\"."
+  },
+  {
+    "question": "Migration GitHub",
+    "response": "Migration vers GitHub : git clone ton-ancien-repo, cd dans le dossier, git remote set-url origin nouvelle-url-github, git push origin --all pour transférer toutes les branches."
+  },
+  {
     "question": "Comment déboguer une exception ?",
-    "response": "Pose un point d’arrêt à l’endroit où l’exception se produit, regarde la stack trace et les valeurs des variables. Utilise aussi `try/catch` pour logger les détails."
+    "response": "Pose un point d'arrêt à l'endroit où l'exception se produit, regarde la stack trace et les valeurs des variables. Utilise aussi `try/catch` pour logger les détails."
   },
   {
     "question": "Comment créer une méthode asynchrone ?",
@@ -25,7 +45,7 @@
   },
   {
     "question": "Comment résoudre un conflit Git ?",
-    "response": "Git t’indique les fichiers en conflit. Ouvre-les, garde ou fusionne les bons blocs (`<<<<<<<`, `=======`, `>>>>>>>`) puis valide (`commit`) les changements corrigés."
+    "response": "Git t'indique les fichiers en conflit. Ouvre-les, garde ou fusionne les bons blocs (`<<<<<<<`, `=======`, `>>>>>>>`) puis valide (`commit`) les changements corrigés."
   },
   {
     "question": "Comment publier une application ASP.NET Core ?",
@@ -33,7 +53,7 @@
   },
   {
     "question": "Comment protéger une API avec un token ?",
-    "response": "Implémente l’authentification avec JWT. Ajoute `Authentication` dans `Program.cs`, configure le middleware, et sécurise tes endpoints avec `[Authorize]`."
+    "response": "Implémente l'authentification avec JWT. Ajoute `Authentication` dans `Program.cs`, configure le middleware, et sécurise tes endpoints avec `[Authorize]`."
   },
   {
     "question": "Comment faire un log dans une application C# ?",
@@ -78,5 +98,13 @@
   {
     "question": "Comment supprimer une branche Git ?",
     "response": "`git branch -d nom-de-branche` pour supprimer localement. Ajoute `-D` pour forcer. Pour supprimer à distance : `git push origin --delete nom-de-branche`."
+  },
+  {
+    "question": "SQL Server connexion string",
+    "response": "Exemple de chaîne de connexion SQL Server : \"Server=localhost;Database=MaBase;Trusted_Connection=true;\" ou avec authentification : \"Server=localhost;Database=MaBase;User Id=monUser;Password=monMdp;\""
+  },
+  {
+    "question": "Entity Framework connection",
+    "response": "Dans appsettings.json : \"ConnectionStrings\": { \"DefaultConnection\": \"Server=...\" }. Dans Program.cs : services.AddDbContext<MonContext>(options => options.UseSqlServer(connectionString));"
   }
 ]

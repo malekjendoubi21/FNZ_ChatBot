@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FNZ-ChatBot")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+49638801fce79749110e5c12ad563f81f156db72")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8052c20b5bbcbba4b5a0a2a4566b70e2f74ea800")]
 [assembly: System.Reflection.AssemblyProductAttribute("FNZ-ChatBot")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FNZ-ChatBot")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

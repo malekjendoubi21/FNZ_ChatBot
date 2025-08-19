@@ -1,11 +1,7 @@
-wwwroot\css\modern.css
 wwwroot\css\site.css
-wwwroot\css\visibility-fix.css
 wwwroot\favicon.ico
 wwwroot\images\FNZ_Logo.svg
-wwwroot\js\modern.js
 wwwroot\js\site.js
-wwwroot\js\visibility-fix.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css
@@ -63,3 +59,13 @@ wwwroot\lib\jquery\dist\jquery.js
 wwwroot\lib\jquery\dist\jquery.min.js
 wwwroot\lib\jquery\dist\jquery.min.map
 wwwroot\lib\jquery\LICENSE.txt
+wwwroot\css\modern.css
+wwwroot\js\modern.js
+wwwroot\css\visibility-fix.css
+wwwroot\js\visibility-fix.js
+wwwroot\css\chat-modern.css
+wwwroot\js\chat-modern.js
+wwwroot\css\chat-interface.css
+wwwroot\css\chat-suggestions.css
+wwwroot\css\chat-variables.css
+wwwroot\css\conversation-history.css

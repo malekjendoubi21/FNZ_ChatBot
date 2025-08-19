@@ -1,0 +1,365 @@
+﻿using FNZ_ChatBot.Models;
+using FNZ_ChatBot.Services;
+using FNZ_ChatBot.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.ML;
+using Microsoft.ML.Data;
+
+namespace FNZ_ChatBot.Services
+{
+    public class SemanticChatService : IChatService
+    {
+        private readonly ApplicationDbContext _context;
+        private readonly MLContext _mlContext;
+        private ITransformer _model;
+        private List<KnowledgeBase> _knowledgeCache;
+        private Dictionary<int, float[]> _embeddings;
+        private readonly Dictionary<string, string> _standardResponses;
+
+        public SemanticChatService(ApplicationDbContext context)
+        {
+            _context = context;
+            _mlContext = new MLContext(seed: 0);
+            InitializeStandardResponses();
+            InitializeSemanticSearch();
+        }
+
+        private void InitializeStandardResponses()
+        {
+            _standardResponses = new Dictionary<string, string>
+            {
+                // Salutations
+                ["bonjour"] = "Bonjour ! Comment puis-je vous aider aujourd'hui ?",
+                ["salut"] = "Salut ! Je suis là pour répondre à vos questions.",
+                ["hello"] = "Hello ! Que puis-je faire pour vous ?",
+                ["bonsoir"] = "Bonsoir ! Comment puis-je vous aider ?",
+                
+                // Questions sur l'assistant
+                ["qui êtes-vous"] = "Je suis l'assistant virtuel FNZ, conçu pour vous aider avec vos questions professionnelles.",
+                ["qui es-tu"] = "Je suis l'assistant virtuel FNZ, conçu pour vous aider avec vos questions professionnelles.",
+                ["que pouvez-vous faire"] = "Je peux répondre à vos questions en me basant sur la base de connaissances FNZ. N'hésitez pas à me poser vos questions !",
+                ["vos fonctionnalités"] = "Je peux vous aider avec toutes les informations présentes dans la base de connaissances FNZ. Posez-moi vos questions !",
+                
+                // Politesse
+                ["comment allez-vous"] = "Je vais bien, merci ! Je suis prêt à vous aider. Quelle est votre question ?",
+                ["comment ça va"] = "Ça va très bien ! Comment puis-je vous aider ?",
+                ["merci"] = "De rien ! N'hésitez pas si vous avez d'autres questions.",
+                ["au revoir"] = "Au revoir ! N'hésitez pas à revenir si vous avez d'autres questions.",
+                
+                // Questions d'aide
+                ["aide"] = "Je suis là pour vous aider ! Posez-moi vos questions sur les sujets couverts par la base de connaissances FNZ.",
+                ["comment utiliser"] = "Posez-moi simplement vos questions en français. Je vais chercher les meilleures réponses dans la base de connaissances.",
+            };
+        }
+
+        private void InitializeSemanticSearch()
+        {
+            try
+            {
+                RefreshKnowledgeCache().Wait();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur lors de l'initialisation : {ex.Message}");
+            }
+        }
+
+        private async Task RefreshKnowledgeCache()
+        {
+            _knowledgeCache = await _context.KnowledgeBase
+                .Where(k => k.IsActive)
+                .ToListAsync();
+
+            if (_knowledgeCache.Any())
+            {
+                try
+                {
+                    // Créer les données d'entraînement
+                    var trainingData = _knowledgeCache.Select(k => new TextData { Text = k.Question }).ToList();
+                    
+                    // Créer le pipeline de transformation
+                    var dataView = _mlContext.Data.LoadFromEnumerable(trainingData);
+                    var pipeline = _mlContext.Transforms.Text.FeaturizeText("Features", nameof(TextData.Text));
+                    
+                    // Entraîner le modèle
+                    _model = pipeline.Fit(dataView);
+                    
+                    // Pré-calculer les embeddings pour toutes les questions
+                    _embeddings = new Dictionary<int, float[]>();
+                    foreach (var item in _knowledgeCache)
+                    {
+                        var embedding = GetEmbedding(item.Question);
+                        if (embedding.Length > 0)
+                        {
+                            _embeddings[item.Id] = embedding;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Erreur lors de la création du modèle sémantique : {ex.Message}");
+                }
+            }
+        }
+
+        private float[] GetEmbedding(string text)
+        {
+            if (_model == null || string.IsNullOrWhiteSpace(text))
+                return Array.Empty<float>();
+
+            try
+            {
+                var data = new[] { new TextData { Text = text } };
+                var dataView = _mlContext.Data.LoadFromEnumerable(data);
+                var transformedData = _model.Transform(dataView);
+                
+                var features = _mlContext.Data.CreateEnumerable<TextFeatures>(transformedData, reuseRowObject: false).FirstOrDefault();
+                return features?.Features ?? Array.Empty<float>();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur lors de la création de l'embedding : {ex.Message}");
+                return Array.Empty<float>();
+            }
+        }
+
+        public string GetResponse(string userInput)
+        {
+            return GetResponseAsync(userInput).Result;
+        }
+
+        public async Task<string> GetResponseAsync(string userInput, string? userId = null, int? conversationId = null)
+        {
+            var response = await GetResponseInternal(userInput);
+            
+            // Enregistrer dans l'historique si un utilisateur est connecté
+            if (!string.IsNullOrEmpty(userId))
+            {
+                var conversationHistory = new ConversationHistory
+                {
+                    UserId = userId,
+                    ConversationId = conversationId,
+                    Question = userInput,
+                    Response = response,
+                    CreatedDate = DateTime.UtcNow
+                };
+
+                _context.ConversationHistory.Add(conversationHistory);
+                await _context.SaveChangesAsync();
+            }
+
+            return response;
+        }
+
+        private async Task<string> GetResponseInternal(string userInput)
+        {
+            if (string.IsNullOrWhiteSpace(userInput))
+                return "Veuillez entrer une question.";
+
+            var normalizedInput = userInput.ToLower().Trim();
+
+            // 1. Vérifier les réponses standard d'abord
+            var standardResponse = GetStandardResponse(normalizedInput);
+            if (!string.IsNullOrEmpty(standardResponse))
+                return standardResponse;
+
+            // 2. Si pas de cache de connaissances, le recharger
+            if (_knowledgeCache == null || !_knowledgeCache.Any())
+            {
+                await RefreshKnowledgeCache();
+            }
+
+            // 3. Si toujours pas de données, retourner message d'erreur
+            if (_knowledgeCache == null || !_knowledgeCache.Any())
+            {
+                return "La base de connaissances est actuellement vide. Veuillez contacter un administrateur pour ajouter du contenu.";
+            }
+
+            // 4. Recherche sémantique si le modèle est disponible
+            if (_model != null && _embeddings != null && _embeddings.Any())
+            {
+                var semanticResults = SearchSemanticMatches(userInput);
+                if (semanticResults.Any())
+                {
+                    return FormatResponse(semanticResults, "Voici les informations les plus pertinentes :");
+                }
+            }
+
+            // 5. Recherche textuelle de fallback
+            var textualResults = SearchTextualMatches(userInput);
+            if (textualResults.Any())
+            {
+                return FormatTextualResponse(textualResults);
+            }
+
+            // 6. Aucun résultat trouvé
+            return GetNoResultsResponse();
+        }
+
+        private string GetStandardResponse(string normalizedInput)
+        {
+            foreach (var (key, response) in _standardResponses)
+            {
+                if (normalizedInput.Contains(key))
+                {
+                    return response;
+                }
+            }
+            return string.Empty;
+        }
+
+        private List<(KnowledgeBase item, float score)> SearchSemanticMatches(string userInput)
+        {
+            try
+            {
+                var inputEmbedding = GetEmbedding(userInput);
+                if (inputEmbedding.Length == 0)
+                    return new List<(KnowledgeBase, float)>();
+
+                var results = new List<(KnowledgeBase item, float score)>();
+
+                foreach (var item in _knowledgeCache)
+                {
+                    if (_embeddings.TryGetValue(item.Id, out var itemEmbedding))
+                    {
+                        var similarity = CosineSimilarity(inputEmbedding, itemEmbedding);
+                        if (similarity > 0.3f) // Seuil de similarité ajustable
+                        {
+                            results.Add((item, similarity));
+                        }
+                    }
+                }
+
+                return results
+                    .OrderByDescending(r => r.score)
+                    .Take(3)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur lors de la recherche sémantique : {ex.Message}");
+                return new List<(KnowledgeBase, float)>();
+            }
+        }
+
+        private List<KnowledgeBase> SearchTextualMatches(string userInput)
+        {
+            try
+            {
+                var normalizedInput = userInput.ToLower();
+                
+                return _knowledgeCache
+                    .Where(k => 
+                        k.Question.ToLower().Contains(normalizedInput) || 
+                        normalizedInput.Contains(k.Question.ToLower()) ||
+                        CalculateTextSimilarity(k.Question.ToLower(), normalizedInput) > 0.2)
+                    .OrderByDescending(k => CalculateTextSimilarity(k.Question.ToLower(), normalizedInput))
+                    .Take(3)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur lors de la recherche textuelle : {ex.Message}");
+                return new List<KnowledgeBase>();
+            }
+        }
+
+        private string FormatResponse(List<(KnowledgeBase item, float score)> results, string introduction)
+        {
+            if (!results.Any())
+                return GetNoResultsResponse();
+
+            if (results.Count == 1)
+            {
+                return results[0].item.Response;
+            }
+
+            var response = introduction + "\n\n";
+            
+            for (int i = 0; i < results.Count; i++)
+            {
+                var result = results[i];
+                response += $"**{i + 1}.** {result.item.Response}\n\n";
+            }
+
+            return response.Trim();
+        }
+
+        private string FormatTextualResponse(List<KnowledgeBase> results)
+        {
+            if (!results.Any())
+                return GetNoResultsResponse();
+
+            if (results.Count == 1)
+            {
+                return results[0].Response;
+            }
+
+            var response = "Voici les informations que j'ai trouvées :\n\n";
+            
+            for (int i = 0; i < results.Count; i++)
+            {
+                response += $"**{i + 1}.** {results[i].Response}\n\n";
+            }
+
+            return response.Trim();
+        }
+
+        private string GetNoResultsResponse()
+        {
+            var responses = new[]
+            {
+                "Je suis désolé, je n'ai pas trouvé d'information pertinente dans ma base de connaissances pour cette question.",
+                "Cette question dépasse mes connaissances actuelles. Vous pouvez reformuler ou contacter un administrateur.",
+                "Je ne trouve pas de réponse appropriée à votre question dans les données disponibles.",
+            };
+            return responses[new Random().Next(responses.Length)];
+        }
+
+        private float CosineSimilarity(float[] vector1, float[] vector2)
+        {
+            if (vector1 == null || vector2 == null || vector1.Length != vector2.Length || vector1.Length == 0)
+                return 0f;
+
+            float dotProduct = 0f, magnitude1 = 0f, magnitude2 = 0f;
+            
+            for (int i = 0; i < vector1.Length; i++)
+            {
+                dotProduct += vector1[i] * vector2[i];
+                magnitude1 += vector1[i] * vector1[i];
+                magnitude2 += vector2[i] * vector2[i];
+            }
+
+            if (magnitude1 == 0f || magnitude2 == 0f)
+                return 0f;
+
+            return dotProduct / (float)(Math.Sqrt(magnitude1) * Math.Sqrt(magnitude2));
+        }
+
+        private double CalculateTextSimilarity(string text1, string text2)
+        {
+            if (string.IsNullOrEmpty(text1) || string.IsNullOrEmpty(text2))
+                return 0;
+
+            var words1 = text1.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            var words2 = text2.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+            var commonWords = words1.Intersect(words2).Count();
+            var totalWords = words1.Union(words2).Count();
+
+            return totalWords == 0 ? 0 : (double)commonWords / totalWords;
+        }
+    }
+
+    // Classes pour ML.NET
+    public class TextData
+    {
+        public string Text { get; set; } = string.Empty;
+    }
+
+    public class TextFeatures
+    {
+        [VectorType(65536)]
+        public float[] Features { get; set; } = Array.Empty<float>();
+    }
+}

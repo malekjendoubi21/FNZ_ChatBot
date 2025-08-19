@@ -1,0 +1,280 @@
+/* Variables CSS globales pour le chatbot */
+:root {
+    /* Couleurs principales */
+    --chat-primary: #667eea;
+    --chat-primary-dark: #5a6fd8;
+    --chat-secondary: #764ba2;
+    --chat-accent: #4facfe;
+    
+    /* Couleurs de surface */
+    --chat-bg: #f8fafc;
+    --chat-surface: #ffffff;
+    --chat-surface-elevated: #f1f5f9;
+    
+    /* Couleurs de bordure */
+    --chat-border: #e2e8f0;
+    --chat-border-light: #f1f5f9;
+    --chat-border-dark: #cbd5e0;
+    
+    /* Couleurs de texte */
+    --chat-text: #1a202c;
+    --chat-text-light: #718096;
+    --chat-text-lighter: #a0aec0;
+    --chat-text-inverse: #ffffff;
+    
+    /* Couleurs des bulles */
+    --chat-user-bubble: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --chat-bot-bubble: #f7fafc;
+    --chat-bot-text: #2d3748;
+    
+    /* États */
+    --chat-hover: #f1f5f9;
+    --chat-active: #e2e8f0;
+    --chat-focus: rgba(102, 126, 234, 0.1);
+    
+    /* Ombres */
+    --chat-shadow: 0 4px 20px rgba(102, 126, 234, 0.1);
+    --chat-shadow-hover: 0 8px 30px rgba(102, 126, 234, 0.15);
+    --chat-shadow-elevated: 0 12px 40px rgba(102, 126, 234, 0.2);
+    
+    /* Animations */
+    --chat-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --chat-transition-fast: all 0.15s ease;
+    --chat-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    /* Espacements */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+    
+    /* Bordures arrondies */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-full: 50%;
+    
+    /* Typographie */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 1.875rem;
+    
+    /* Z-index */
+    --z-dropdown: 1000;
+    --z-sticky: 1020;
+    --z-fixed: 1030;
+    --z-modal-backdrop: 1040;
+    --z-modal: 1050;
+    --z-tooltip: 1070;
+}
+
+/* Mode sombre (optionnel) */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --chat-bg: #1a1a1a;
+        --chat-surface: #2d2d2d;
+        --chat-surface-elevated: #3a3a3a;
+        --chat-border: #404040;
+        --chat-border-light: #4a4a4a;
+        --chat-border-dark: #333333;
+        --chat-text: #ffffff;
+        --chat-text-light: #a0a0a0;
+        --chat-text-lighter: #808080;
+        --chat-bot-bubble: #3a3a3a;
+        --chat-bot-text: #e0e0e0;
+        --chat-hover: #404040;
+        --chat-active: #4a4a4a;
+        --chat-focus: rgba(102, 126, 234, 0.2);
+    }
+}
+
+/* Utilitaires CSS */
+.chat-gradient-bg {
+    background: var(--chat-user-bubble);
+}
+
+.chat-text-gradient {
+    background: var(--chat-user-bubble);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.chat-glass {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.chat-hover-lift {
+    transition: var(--chat-transition);
+}
+
+.chat-hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--chat-shadow-hover);
+}
+
+.chat-ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.chat-ripple::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.chat-ripple:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Animation de chargement */
+.chat-loading {
+    position: relative;
+}
+
+.chat-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid transparent;
+    border-top: 2px solid var(--chat-primary);
+    border-radius: 50%;
+    animation: chat-spin 1s linear infinite;
+}
+
+@keyframes chat-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Animation de pulsation pour les éléments actifs */
+.chat-pulse {
+    animation: chat-pulse 2s infinite;
+}
+
+@keyframes chat-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(102, 126, 234, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(102, 126, 234, 0);
+    }
+}
+
+/* Animation de glissement pour les éléments qui apparaissent */
+.chat-slide-in {
+    animation: chat-slide-in 0.3s ease-out;
+}
+
+@keyframes chat-slide-in {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.chat-slide-up {
+    animation: chat-slide-up 0.3s ease-out;
+}
+
+@keyframes chat-slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Scrollbar personnalisée pour les zones de chat */
+.chat-scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-scrollbar::-webkit-scrollbar-track {
+    background: var(--chat-surface);
+    border-radius: var(--radius-sm);
+}
+
+.chat-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--chat-border-dark);
+    border-radius: var(--radius-sm);
+    transition: var(--chat-transition);
+}
+
+.chat-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--chat-text-light);
+}
+
+/* Classes d'état pour les messages */
+.message-sending {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.message-sent {
+    animation: chat-message-sent 0.3s ease;
+}
+
+@keyframes chat-message-sent {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.98); }
+    100% { transform: scale(1); }
+}
+
+.message-error {
+    border-left: 4px solid #dc3545;
+    background: rgba(220, 53, 69, 0.1);
+}
+
+/* Responsive helpers */
+@media (max-width: 768px) {
+    :root {
+        --spacing-sm: 0.375rem;
+        --spacing-md: 0.75rem;
+        --spacing-lg: 1.25rem;
+        --spacing-xl: 1.5rem;
+        --spacing-2xl: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --font-size-base: 0.9rem;
+        --font-size-lg: 1rem;
+        --font-size-xl: 1.125rem;
+        --font-size-2xl: 1.25rem;
+    }
+}

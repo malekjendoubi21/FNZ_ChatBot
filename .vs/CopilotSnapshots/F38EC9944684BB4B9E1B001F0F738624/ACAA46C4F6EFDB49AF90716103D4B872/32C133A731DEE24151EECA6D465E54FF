@@ -1,0 +1,82 @@
+﻿[
+  {
+    "question": "Comment faire une connexion à une base de données SQL Server en C# ?",
+    "response": "Tu peux utiliser `SqlConnection` avec une chaîne de connexion. N'oublie pas d'ouvrir et fermer la connexion correctement, ou utilise `using` pour la fermer automatiquement."
+  },
+  {
+    "question": "Comment exécuter une requête SELECT en C# ?",
+    "response": "Utilise `SqlCommand` avec `ExecuteReader()` pour lire les résultats. Parcours les données avec un `SqlDataReader`."
+  },
+  {
+    "question": "Comment faire une API REST avec ASP.NET Core ?",
+    "response": "Tu dois créer un contrôleur avec l’attribut `[ApiController]` et utiliser des routes `[HttpGet]`, `[HttpPost]`, etc. Tu peux utiliser Entity Framework pour la couche de données."
+  },
+  {
+    "question": "Comment faire une migration avec Entity Framework ?",
+    "response": "Utilise la commande `Add-Migration NomMigration` dans la console du gestionnaire de package, puis `Update-Database` pour appliquer les changements."
+  },
+  {
+    "question": "Comment déboguer une exception ?",
+    "response": "Pose un point d’arrêt à l’endroit où l’exception se produit, regarde la stack trace et les valeurs des variables. Utilise aussi `try/catch` pour logger les détails."
+  },
+  {
+    "question": "Comment créer une méthode asynchrone ?",
+    "response": "Utilise le mot-clé `async` et retourne un `Task`. Appelle les opérations longues avec `await` pour ne pas bloquer le thread principal."
+  },
+  {
+    "question": "Comment résoudre un conflit Git ?",
+    "response": "Git t’indique les fichiers en conflit. Ouvre-les, garde ou fusionne les bons blocs (`<<<<<<<`, `=======`, `>>>>>>>`) puis valide (`commit`) les changements corrigés."
+  },
+  {
+    "question": "Comment publier une application ASP.NET Core ?",
+    "response": "Utilise `dotnet publish` ou les options de publication de Visual Studio. Tu peux cibler un dossier, un serveur FTP ou Azure App Service."
+  },
+  {
+    "question": "Comment protéger une API avec un token ?",
+    "response": "Implémente l’authentification avec JWT. Ajoute `Authentication` dans `Program.cs`, configure le middleware, et sécurise tes endpoints avec `[Authorize]`."
+  },
+  {
+    "question": "Comment faire un log dans une application C# ?",
+    "response": "Utilise une bibliothèque comme `Serilog`, `NLog`, ou `ILogger<T>`. Tu peux écrire dans des fichiers, la console ou des services externes comme Seq."
+  },
+  {
+    "question": "Comment optimiser une requête LINQ ?",
+    "response": "Évite les appels multiples à la base (comme `.ToList()` avant les filtres), utilise le `Select` après le `Where`, et préfère les projections pour limiter les colonnes récupérées."
+  },
+  {
+    "question": "Comment structurer un projet ASP.NET MVC ?",
+    "response": "Sépare les responsabilités en 3 dossiers : Models, Views, Controllers. Mets les règles métiers dans les services, pas dans les contrôleurs. Utilise des ViewModels pour la vue."
+  },
+  {
+    "question": "Comment faire un appel HTTP vers une autre API ?",
+    "response": "Utilise `HttpClient` en injectant une instance dans ton service. Utilise `await client.GetAsync()` ou `PostAsync()` pour envoyer des requêtes, et traite la réponse avec `ReadAsStringAsync()`."
+  },
+  {
+    "question": "Comment utiliser AutoMapper ?",
+    "response": "Installe AutoMapper via NuGet. Crée un profil avec `CreateMap<Source, Destination>()`, enregistre-le au démarrage, et injecte `IMapper` pour mapper des objets facilement."
+  },
+  {
+    "question": "Quelle est la commande Git pour cloner un dépôt ?",
+    "response": "`git clone <url_du_depot>` – elle permet de copier un projet distant sur ta machine locale."
+  },
+  {
+    "question": "Quelle est la commande Git pour créer une branche ?",
+    "response": "`git checkout -b nom-de-branche` – elle crée une nouvelle branche et te place dessus."
+  },
+  {
+    "question": "Quelle est la commande Git pour voir les modifications ?",
+    "response": "`git status` – elle affiche les fichiers modifiés, ajoutés ou supprimés depuis le dernier commit."
+  },
+  {
+    "question": "Quelle est la commande Git pour fusionner une branche ?",
+    "response": "`git merge nom-de-branche` – elle fusionne la branche spécifiée dans ta branche actuelle."
+  },
+  {
+    "question": "Quelle est la commande Git pour résoudre un conflit ?",
+    "response": "Après un `merge` qui crée un conflit, édite les fichiers marqués, choisis les bons changements, puis fais `git add` et `git commit`."
+  },
+  {
+    "question": "Comment supprimer une branche Git ?",
+    "response": "`git branch -d nom-de-branche` pour supprimer localement. Ajoute `-D` pour forcer. Pour supprimer à distance : `git push origin --delete nom-de-branche`."
+  }
+]

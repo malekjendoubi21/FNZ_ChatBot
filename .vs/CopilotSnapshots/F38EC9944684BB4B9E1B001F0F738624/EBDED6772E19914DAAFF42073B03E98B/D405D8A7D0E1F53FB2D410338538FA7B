@@ -1,0 +1,423 @@
+﻿using FNZ_ChatBot.Services;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using FNZ_ChatBot.Models;
+using FNZ_ChatBot.Data;
+
+namespace FNZ_ChatBot.Controllers
+{
+    [Authorize] // Nécessite une authentification
+    public class ChatController : Controller
+    {
+        private readonly IChatService _chatService;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ApplicationDbContext _context;
+
+        public ChatController(IChatService chatService, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+        {
+            _chatService = chatService;
+            _userManager = userManager;
+            _context = context;
+        }
+
+        // GET: ChatController
+        public async Task<ActionResult> Index(int? conversationId = null)
+        {
+            var userId = _userManager.GetUserId(User);
+            
+            // Si conversationId est fourni, charger cette conversation
+            if (conversationId.HasValue)
+            {
+                var conversation = await _context.Conversations
+                    .Include(c => c.Messages)
+                    .FirstOrDefaultAsync(c => c.Id == conversationId.Value && c.UserId == userId);
+                
+                if (conversation != null)
+                {
+                    ViewData["ConversationId"] = conversationId.Value;
+                    ViewData["ConversationTitle"] = conversation.Title;
+                    ViewData["Messages"] = conversation.Messages.OrderBy(m => m.CreatedDate).ToList();
+                }
+            }
+            
+            // Charger les conversations de l'utilisateur pour la sidebar
+            var conversations = await _context.Conversations
+                .Where(c => c.UserId == userId && c.IsActive)
+                .OrderByDescending(c => c.LastActivity)
+                .Take(10)
+                .ToListAsync();
+            
+            ViewData["Conversations"] = conversations;
+            
+            return View("GetResponse");
+        }
+
+        // API pour créer une nouvelle conversation
+        [HttpPost]
+        public async Task<IActionResult> CreateConversation([FromBody] string title)
+        {
+            var userId = _userManager.GetUserId(User);
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            var conversation = new Conversation
+            {
+                UserId = userId,
+                Title = string.IsNullOrWhiteSpace(title) ? $"Conversation {DateTime.Now:dd/MM/yyyy HH:mm}" : title,
+                CreatedDate = DateTime.UtcNow,
+                LastActivity = DateTime.UtcNow,
+                IsActive = true
+            };
+
+            _context.Conversations.Add(conversation);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { conversationId = conversation.Id, title = conversation.Title });
+        }
+
+        // API pour envoyer une question et obtenir une réponse
+        [HttpPost]
+        public async Task<IActionResult> GetResponse([FromBody] ChatRequest request)
+        {
+            if (string.IsNullOrWhiteSpace(request.UserInput))
+                return BadRequest("La question ne peut pas être vide.");
+
+            var userId = _userManager.GetUserId(User);
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            // Si pas de conversationId fourni, créer une nouvelle conversation
+            if (!request.ConversationId.HasValue)
+            {
+                var newConversation = new Conversation
+                {
+                    UserId = userId,
+                    Title = request.UserInput.Length > 50 ? request.UserInput.Substring(0, 50) + "..." : request.UserInput,
+                    CreatedDate = DateTime.UtcNow,
+                    LastActivity = DateTime.UtcNow,
+                    IsActive = true
+                };
+
+                _context.Conversations.Add(newConversation);
+                await _context.SaveChangesAsync();
+                request.ConversationId = newConversation.Id;
+            }
+            else
+            {
+                // Mettre à jour la dernière activité de la conversation
+                var conversation = await _context.Conversations
+                    .FirstOrDefaultAsync(c => c.Id == request.ConversationId.Value && c.UserId == userId);
+                
+                if (conversation != null)
+                {
+                    conversation.LastActivity = DateTime.UtcNow;
+                    await _context.SaveChangesAsync();
+                }
+            }
+
+            var response = await _chatService.GetResponseAsync(request.UserInput, userId, request.ConversationId);
+            
+            return Ok(new { 
+                question = request.UserInput, 
+                answer = response,
+                conversationId = request.ConversationId
+            });
+        }
+
+        // GET: Conversations list
+        public async Task<IActionResult> MyConversations()
+        {
+            var userId = _userManager.GetUserId(User);
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            var conversations = await _context.Conversations
+                .Where(c => c.UserId == userId && c.IsActive)
+                .OrderByDescending(c => c.LastActivity)
+                .ToListAsync();
+
+            return View(conversations);
+        }
+
+        // POST: Delete conversation
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConversation(int id)
+        {
+            var userId = _userManager.GetUserId(User);
+            var conversation = await _context.Conversations
+                .FirstOrDefaultAsync(c => c.Id == id && c.UserId == userId);
+
+            if (conversation == null)
+                return NotFound();
+
+            conversation.IsActive = false;
+            await _context.SaveChangesAsync();
+
+            TempData["Success"] = "Conversation supprimée avec succès.";
+            return RedirectToAction(nameof(MyConversations));
+        }
+
+        // Les autres méthodes restent inchangées pour compatibilité
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult Edit(int id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // API pour obtenir des suggestions de questions
+        [HttpGet]
+        public async Task<IActionResult> GetQuestionSuggestions()
+        {
+            var userId = _userManager.GetUserId(User);
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            var suggestions = await _context.KnowledgeBase
+                .Where(k => k.IsActive)
+                .OrderBy(k => Guid.NewGuid()) // Randomisation
+                .Take(6)
+                .ToListAsync();
+
+            var categories = new Dictionary<string, string>
+            {
+                ["SQL"] = "💾",
+                ["Git"] = "🔄", 
+                ["API"] = "🌐",
+                ["Entity Framework"] = "🗄️",
+                ["C# / .NET"] = "⚡",
+                ["Général"] = "❓"
+            };
+
+            var questionSuggestions = suggestions.Select(item => {
+                var question = item.Question;
+                var category = DetermineCategory(question);
+                var icon = categories.GetValueOrDefault(category, "❓");
+                var simplifiedQuestion = SimplifyQuestionForUser(question);
+
+                return new QuestionSuggestion
+                {
+                    OriginalQuestion = question,
+                    DisplayQuestion = simplifiedQuestion,
+                    Category = category,
+                    Icon = icon
+                };
+            }).ToList();
+
+            return Ok(questionSuggestions);
+        }
+
+        private string DetermineCategory(string question)
+        {
+            var questionLower = question.ToLower();
+            
+            if (questionLower.Contains("sql") || questionLower.Contains("database") || questionLower.Contains("base") && questionLower.Contains("données"))
+                return "SQL";
+            if (questionLower.Contains("git") || questionLower.Contains("github") || questionLower.Contains("repository"))
+                return "Git";
+            if (questionLower.Contains("api") || questionLower.Contains("rest") || questionLower.Contains("endpoint"))
+                return "API";
+            if (questionLower.Contains("entity") || questionLower.Contains("framework") || questionLower.Contains("migration"))
+                return "Entity Framework";
+            if (questionLower.Contains("c#") || questionLower.Contains("csharp") || questionLower.Contains(".net") || questionLower.Contains("async"))
+                return "C# / .NET";
+                
+            return "Général";
+        }
+
+        private string SimplifyQuestionForUser(string originalQuestion)
+        {
+            // Simplifier les questions pour les rendre plus attrayantes pour les utilisateurs
+            var simplified = originalQuestion
+                .Replace("Comment faire ", "")
+                .Replace("Comment créer ", "Créer ")
+                .Replace("Comment utiliser ", "Utiliser ")
+                .Replace("Quelle est la commande ", "Commande ")
+                .Replace(" en C# ?", "")
+                .Replace(" ?", "");
+
+            // Limiter la longueur
+            if (simplified.Length > 50)
+            {
+                simplified = simplified.Substring(0, 47) + "...";
+            }
+
+            return simplified;
+        }
+
+        // POST: API pour poster un message et obtenir une réponse
+        [HttpPost]
+        public async Task<IActionResult> PostMessage([FromBody] QuestionInput input)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Json(new { success = false, message = "Question invalide" });
+            }
+
+            try
+            {
+                var userId = _userManager.GetUserId(User);
+                if (string.IsNullOrEmpty(userId))
+                {
+                    return Json(new { success = false, message = "Utilisateur non authentifié" });
+                }
+
+                var response = await _chatService.GetResponseAsync(input.Question, userId, input.ConversationId);
+
+                return Json(new 
+                { 
+                    success = true, 
+                    response = response,
+                    timestamp = DateTime.Now.ToString("HH:mm")
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Erreur lors du traitement de la question: " + ex.Message });
+            }
+        }
+
+        // GET: Conversations de l'utilisateur
+        public async Task<IActionResult> MyConversations()
+        {
+            var userId = _userManager.GetUserId(User);
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            var conversations = await _context.Conversations
+                .Where(c => c.UserId == userId && c.IsActive)
+                .OrderByDescending(c => c.LastActivity)
+                .ToListAsync();
+
+            return View(conversations);
+        }
+
+        // POST: Créer une nouvelle conversation
+        [HttpPost]
+        public async Task<IActionResult> CreateConversation([FromBody] CreateConversationRequest request)
+        {
+            var userId = _userManager.GetUserId(User);
+            if (string.IsNullOrEmpty(userId))
+                return Json(new { success = false, message = "Non authentifié" });
+
+            var conversation = new Conversation
+            {
+                UserId = userId,
+                Title = request.Title ?? "Nouvelle conversation",
+                CreatedDate = DateTime.UtcNow,
+                LastActivity = DateTime.UtcNow,
+                IsActive = true
+            };
+
+            _context.Conversations.Add(conversation);
+            await _context.SaveChangesAsync();
+
+            return Json(new { success = true, conversationId = conversation.Id });
+        }
+
+        // POST: Supprimer une conversation
+        [HttpPost]
+        public async Task<IActionResult> DeleteConversation(int id)
+        {
+            var userId = _userManager.GetUserId(User);
+            if (string.IsNullOrEmpty(userId))
+                return Json(new { success = false, message = "Non authentifié" });
+
+            var conversation = await _context.Conversations
+                .FirstOrDefaultAsync(c => c.Id == id && c.UserId == userId);
+
+            if (conversation != null)
+            {
+                conversation.IsActive = false;
+                await _context.SaveChangesAsync();
+                return Json(new { success = true });
+            }
+
+            return Json(new { success = false, message = "Conversation non trouvée" });
+        }
+    }
+
+    public class CreateConversationRequest
+    {
+        public string? Title { get; set; }
+    }
+
+    public class QuestionSuggestion
+    {
+        public string OriginalQuestion { get; set; } = string.Empty;
+        public string DisplayQuestion { get; set; } = string.Empty;
+        public string Category { get; set; } = string.Empty;
+        public string Icon { get; set; } = string.Empty;
+    }
+
+    public class QuestionInput
+    {
+        public string Question { get; set; } = string.Empty;
+        public int? ConversationId { get; set; }
+    }
+
+    public class ChatRequest
+    {
+        public string UserInput { get; set; } = string.Empty;
+        public int? ConversationId { get; set; }
+    }
+}
